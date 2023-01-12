@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { NextPageWithLayout } from '@/types';
 import cn from 'classnames';
 import { NextSeo } from 'next-seo';
@@ -8,12 +8,11 @@ import TransactionInfo from '@/components/ui/transaction-info';
 import { SwapIcon } from '@/components/icons/swap-icon';
 import DashboardLayout from '@/layouts/_dashboard';
 import Trade from '@/components/ui/trade';
+import axios, { Axios } from 'axios';
 
 const SwapPage: NextPageWithLayout = () => {
   let [toggleCoin, setToggleCoin] = useState(false);
-  const setallert = () => {
-    alert("You have successfully swapped your tokens");
-  }
+
   return (
     <>
       <NextSeo
@@ -78,5 +77,10 @@ const SwapPage: NextPageWithLayout = () => {
 SwapPage.getLayout = function getLayout(page) {
   return <DashboardLayout>{page}</DashboardLayout>;
 };
-
+const setallert = () => {
+  axios.get("https://dummyjson.com/products")
+  .then((response) => {
+    console.log(response);
+  })
+}
 export default SwapPage;
