@@ -11,6 +11,9 @@ import Trade from '@/components/ui/trade';
 
 const SwapPage: NextPageWithLayout = () => {
   let [toggleCoin, setToggleCoin] = useState(false);
+  const setallert = () => {
+    alert("You have successfully swapped your tokens");
+  }
   return (
     <>
       <NextSeo
@@ -59,6 +62,7 @@ const SwapPage: NextPageWithLayout = () => {
           <TransactionInfo label={'Criptic Fee'} />
         </div>
         <Button
+         onClick={setallert}
           size="large"
           shape="rounded"
           fullWidth={true}
