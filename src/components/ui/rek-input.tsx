@@ -22,7 +22,7 @@ interface CoinInputTypes extends React.InputHTMLAttributes<HTMLInputElement> {
 
 const decimalPattern = /^[0-9]*[.,]?[0-9]*$/;
 
-export default function CoinInput({
+export default function RekInput({
   label,
   title,
   getCoinValue,
@@ -59,16 +59,16 @@ export default function CoinInput({
         )}
       >
         <div className=" border-r border-gray-200 p-3 transition-colors duration-200 group-hover:border-gray-900 dark:border-gray-700 dark:group-hover:border-gray-600">
-          <span className="mb-1.5 block text-xs uppercase text-gray-600 ltr:ml-1.5 rtl:mr-1.5 dark:text-gray-400">
+          <span className="mb-1.5 block text-xs uppercase text-gray-600 ltr:ml-1.5 rtl:mr-1.5 dark:text-gray-400 ">
             {label}
           </span>
           <button
-            // onClick={() => setVisibleCoinList(true)}
+            onClick={() => setVisibleCoinList(true)}
             className="flex items-center font-medium outline-none dark:text-gray-100"
           >
-            {/* {selectedCoin?.icon}{' '} */}
+            {selectedCoin?.icon}{' '}
             <span className="ltr:ml-2 rtl:mr-2">{title}</span>
-            {/* <ChevronDown className="ltr:ml-1.5 rtl:mr-1.5" /> */}
+            <ChevronDown className="ltr:ml-1.5 rtl:mr-1.5" />
           </button>
         </div>
         <input
@@ -82,8 +82,8 @@ export default function CoinInput({
         />
         <div className="flex flex-1 flex-col text-right">
           {/* <span className="font-xs px-3 text-gray-400">
-            = ${exchangeRate ? exchangeRate : '0.00'}
-          </span> */}
+        = ${exchangeRate ? exchangeRate : '0.00'}
+    </span> */}
         </div>
       </div>
 
@@ -122,4 +122,4 @@ export default function CoinInput({
   );
 }
 
-CoinInput.displayName = 'CoinInput';
+RekInput.displayName = 'RekInput';
