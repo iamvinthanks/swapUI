@@ -170,7 +170,7 @@ const SwapPage: NextPageWithLayout = () => {
                 <div role={'separator'} className={'dropdown-divider'} />
                 <p className='text-center'>ID Transaksi</p>
                 <input type='text' className='form-control' value='123456789' readOnly />
-                <h5>IST-09812918391<img></img></h5>
+                <h5>IST-09812918391</h5>
               </div>
               <div className='modal-footer'>
                 <button className='btn btn-success btn-block' data-dismiss='modal'>Check Status Transaksi</button>
