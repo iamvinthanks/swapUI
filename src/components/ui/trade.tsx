@@ -18,15 +18,19 @@ const Listbox = dynamic(() => import('@/components/ui/list-box'));
 
 const tradeMenu = [
   {
-    name: 'Swap',
+    name: 'Redeem',
     value: routes.swap,
   },
   {
-    name: 'Liquidity',
+    name: 'Buy Crypto',
     value: routes.liquidity,
   },
   {
-    name: 'Vote',
+    name: 'Help',
+    value: routes.vote,
+  },
+  {
+    name: 'Soon',
     value: routes.vote,
   },
 ];
@@ -100,7 +104,7 @@ export default function Trade({ children }: React.PropsWithChildren<{}>) {
                 isActive={item.value === router.pathname}
               />
             ))}
-            <AnchorLink
+            {/* <AnchorLink
               href="/"
               className="inline-flex items-center gap-1.5 py-1.5 px-3"
             >
@@ -114,7 +118,7 @@ export default function Trade({ children }: React.PropsWithChildren<{}>) {
               className="dark:text-white"
             >
               <RangeIcon />
-            </Button>
+            </Button> */}
           </div>
         </nav>
         <AnimatePresence exitBeforeEnter>

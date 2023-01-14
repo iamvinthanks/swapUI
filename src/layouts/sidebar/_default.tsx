@@ -51,7 +51,7 @@ export const menuItems = [
     href: routes.farms,
   },
   {
-    name: 'Swap',
+    name: 'Redeem',
     icon: <ExchangeIcon />,
     href: routes.swap,
   },

@@ -24,7 +24,6 @@ const decimalPattern = /^[0-9]*[.,]?[0-9]*$/;
 
 export default function RekInput({
   label,
-  title,
   getCoinValue,
   defaultCoinIndex = 0,
   exchangeRate,
@@ -32,6 +31,7 @@ export default function RekInput({
   ...rest
 }: CoinInputTypes) {
   let [value, setValue] = useState('');
+  let [placeholder, setPlaceholder] = useState('');
   let [selectedCoin, setSelectedCoin] = useState(coinList[defaultCoinIndex]);
   let [visibleCoinList, setVisibleCoinList] = useState(false);
   const modalContainerRef = useRef<HTMLDivElement>(null);
@@ -50,6 +50,7 @@ export default function RekInput({
     setSelectedCoin(coin);
     setVisibleCoinList(false);
   }
+
   return (
     <>
       <div
@@ -58,32 +59,35 @@ export default function RekInput({
           className
         )}
       >
-        <div className=" border-r border-gray-200 p-3 transition-colors duration-200 group-hover:border-gray-900 dark:border-gray-700 dark:group-hover:border-gray-600">
-          <span className="mb-1.5 block text-xs uppercase text-gray-600 ltr:ml-1.5 rtl:mr-1.5 dark:text-gray-400 ">
+        <div className="border-r border-gray-200 p-3 transition-colors duration-200 group-hover:border-gray-900 dark:border-gray-700 dark:group-hover:border-gray-600">
+          <span className="mb-1.5 block text-xs uppercase text-gray-600 dark:text-gray-400">
             {label}
           </span>
           <button
             onClick={() => setVisibleCoinList(true)}
             className="flex items-center font-medium outline-none dark:text-gray-100"
+            value={selectedCoin?.code} 
+            id="type_rekening"
           >
             {selectedCoin?.icon}{' '}
-            <span className="ltr:ml-2 rtl:mr-2">{title}</span>
+            <span className="ltr:ml-2 rtl:mr-2">{selectedCoin?.code} </span>
             <ChevronDown className="ltr:ml-1.5 rtl:mr-1.5" />
           </button>
         </div>
         <input
-          type="text"
-          value={value}
-          placeholder="0.0"
-          inputMode="decimal"
-          onChange={handleOnChange}
-          className="w-full rounded-tr-lg rounded-br-lg border-0 pb-0.5 text-right text-lg outline-none focus:ring-0 dark:bg-light-dark"
-          {...rest}
-        />
+            type="text"
+            value={value}
+            placeholder={placeholder}
+            inputMode="decimal"
+            onChange={handleOnChange}
+            className="w-full rounded-tr-lg rounded-br-lg border-0 pb-0.5 text-right text-lg outline-none focus:ring-0 dark:bg-light-dark"
+            {...rest}
+          />
         <div className="flex flex-1 flex-col text-right">
+          
           {/* <span className="font-xs px-3 text-gray-400">
-        = ${exchangeRate ? exchangeRate : '0.00'}
-    </span> */}
+            {rekening}
+          </span> */}
         </div>
       </div>
 

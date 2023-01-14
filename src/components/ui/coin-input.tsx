@@ -32,6 +32,7 @@ export default function CoinInput({
   ...rest
 }: CoinInputTypes) {
   let [value, setValue] = useState('');
+  let [placeholder, setPlaceholder] = useState('');
   let [selectedCoin, setSelectedCoin] = useState(coinList[defaultCoinIndex]);
   let [visibleCoinList, setVisibleCoinList] = useState(false);
   const modalContainerRef = useRef<HTMLDivElement>(null);
@@ -74,7 +75,7 @@ export default function CoinInput({
         <input
           type="text"
           value={value}
-          placeholder="0.0"
+          placeholder={placeholder}
           inputMode="decimal"
           onChange={handleOnChange}
           className="w-full rounded-tr-lg rounded-br-lg border-0 pb-0.5 text-right text-lg outline-none focus:ring-0 dark:bg-light-dark"

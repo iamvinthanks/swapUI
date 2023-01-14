@@ -14,27 +14,46 @@ import LinearProgress from '@mui/material/LinearProgress';
 import { indexOf } from 'lodash';
 
 const SwapPage: NextPageWithLayout = () => {
+  const [buttonSwap, setButtonSwap] = useState({
+    id:'1',
+    name:'Swap',
+  });
   const [result, setResult] = useState(false);
+  const [confirm, setConfirm] = useState(false);
   const [spinner, setSpinner] = useState(false);
   const [code, setCode] = useState('');
   const [refrence, setRefrence] = useState('');
+  const [rekening, setRekening] = useState('');
   const [card, setCard] = useState({
-    id: '1',
     idr_value: '0',
     crypto_value: '0',
     bersih: '',
+    market_value: '',
   });
   const setallert = async () => {
-    console.log(code, refrence);
-    setSpinner(true);
-    const response = await axios.get(
-      'https://63c0cd6d71656267186d60c4.mockapi.io/price/1'
-    );
-    setCard(response.data);
-    setSpinner(false);
-    setResult(true);
+    if(buttonSwap.id === '1'){
+      console.log(code, refrence,rekening);
+      setSpinner(true);
+      const response = await axios.get(
+        'https://63c0cd6d71656267186d60c4.mockapi.io/price/1'
+      );
+      setCard(response.data);
+      setSpinner(false);
+      setResult(true);
+      setButtonSwap({
+        id:'2',
+        name:'Confirm',
+        });
+    }
+    if(buttonSwap.id === '2'){
+      alert('YAXKKIINNNNNN?');
+    }
+  };
+  const setconfirm = async () => {
+    console.log('confirm')
   };
   let [toggleCoin, setToggleCoin] = useState(false);
+
   return (
     <>
       <NextSeo
@@ -54,6 +73,7 @@ const SwapPage: NextPageWithLayout = () => {
               exchangeRate={1.0}
               title={'Code'}
               // defaultCoinIndex={0}
+              placeholder={'Input Code'}
               getCoinValue={(code) => console.log('From coin value:', code)}
               value={code}
               onChange={(e) => {
@@ -64,6 +84,7 @@ const SwapPage: NextPageWithLayout = () => {
               label={'CODE'}
               title={'Refrence'}
               exchangeRate={2.0}
+              placeholder={'Input Refrence'}
               defaultCoinIndex={1}
               getCoinValue={(data) => console.log('To coin value:', data)}
               value={refrence}
@@ -71,25 +92,30 @@ const SwapPage: NextPageWithLayout = () => {
                 setRefrence(e.target.value);
               }}
             />
+            
             <RekInput
-              label={'YOUR'}
+              label={'Rek Code'}
               exchangeRate={2.0}
               title={'Rekening'}
-              defaultCoinIndex={1}
-              getCoinValue={(data) => console.log('To coin value:', data)}
+              placeholder={'Input Rekening'}
+              getCoinValue={(data) => console.log(data)}
+              value={rekening}
+              onChange={(e) => {
+                setRekening(e.target.value);
+              }}
+              
             />
+            
           </div>
         </div>
         {spinner && <LinearProgress color="success" />}
         {result && (
           <div className="flex flex-col gap-4 xs:gap-[18px]">
             <TransactionInfo label={'Crypto Value'} value={card.idr_value} />
-            <TransactionInfo label={'Crypto Value'} value={card.idr_value} />
-            <TransactionInfo label={'IDR Value'} value={card.crypto_value} />
+            <TransactionInfo label={'Market Price'} value={card.market_value} />
+            <TransactionInfo label={'IDR Value'} value={card.idr_value} />
             <TransactionInfo label={'Fee'} value={'5000'} />
             <TransactionInfo label={'Total - Fee'} value={card.bersih} />
-            <TransactionInfo label={'Network Fee'} />
-            <TransactionInfo label={'Criptic Fee'} />
           </div>
         )}
 
@@ -99,10 +125,59 @@ const SwapPage: NextPageWithLayout = () => {
           shape="rounded"
           fullWidth={true}
           className="mt-6 uppercase xs:mt-8 xs:tracking-widest"
+          id={buttonSwap.id}
         >
-          SWAP
+        {buttonSwap.name}
         </Button>
       </Trade>
+      <div id='confirmed' className='modal fade'>
+          <div className='modal-dialog modal-confirm'>
+            <div className='modal-content'>
+              <div className='modal-header'>
+                <div className='icon-box'>
+                  <i className='material-icons'>&#xE876;</i>
+                </div>
+                <h4 className='modal-title w-100'>Redeem Procesed</h4>
+              </div>
+              <div className='modal-body'>
+                <p className='text-center'>Pesanan Anda diterima dan sedang diproses oleh sistem</p>
+                <table>
+                <tr>
+                    <td>Nama </td>
+                    <td>: Rick Zolenda</td>
+                </tr>
+                <tr>
+                    <td>Jenis Rekening </td>
+                    <td>: BCA</td>
+                </tr>
+                <tr>
+                    <td>Nomor Rekening </td>
+                    <td>: 091721923123</td>
+                </tr>
+                <tr>
+                    <td>Gift Card Value(Crypto) </td>
+                    <td>: 1000 TRX</td>
+                </tr>
+                <tr>
+                    <td>Gift Card Value(IDR)</td>
+                    <td>: Rp 837.985</td>
+                </tr>
+                <tr>
+                    <td>Jumlah Diterima(+fee) </td>
+                    <td>: Rp 100.000</td>
+                </tr>
+                </table>
+                <div role={'separator'} className={'dropdown-divider'} />
+                <p className='text-center'>ID Transaksi</p>
+                <input type='text' className='form-control' value='123456789' readOnly />
+                <h5>IST-09812918391<img></img></h5>
+              </div>
+              <div className='modal-footer'>
+                <button className='btn btn-success btn-block' data-dismiss='modal'>Check Status Transaksi</button>
+              </div>
+            </div>
+          </div>
+      </div>
     </>
   );
 };
