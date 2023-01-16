@@ -17,6 +17,7 @@ interface CoinInputTypes extends React.InputHTMLAttributes<HTMLInputElement> {
   exchangeRate?: number;
   defaultCoinIndex?: number;
   className?: string;
+  setCoin: (coin: string) => void;
   getCoinValue: (param: { coin: string; value: string }) => void;
 }
 
@@ -28,6 +29,7 @@ export default function RekInput({
   defaultCoinIndex = 0,
   exchangeRate,
   className,
+  setCoin,
   ...rest
 }: CoinInputTypes) {
   let [value, setValue] = useState('');
@@ -44,10 +46,12 @@ export default function RekInput({
       setValue(event.target.value);
       let param = { coin: selectedCoin.code, value: event.target.value };
       getCoinValue && getCoinValue(param);
+      setCoin(selectedCoin.code);
     }
   };
   function handleSelectedCoin(coin: CoinTypes) {
     setSelectedCoin(coin);
+    setCoin(coin.code);
     setVisibleCoinList(false);
   }
 
@@ -64,9 +68,11 @@ export default function RekInput({
             {label}
           </span>
           <button
-            onClick={() => setVisibleCoinList(true)}
+            onClick={() => {
+              setVisibleCoinList(true);
+            }}
             className="flex items-center font-medium outline-none dark:text-gray-100"
-            value={selectedCoin?.code} 
+            value={selectedCoin?.code}
             id="type_rekening"
           >
             {selectedCoin?.icon}{' '}
@@ -75,16 +81,15 @@ export default function RekInput({
           </button>
         </div>
         <input
-            type="text"
-            value={value}
-            placeholder={placeholder}
-            inputMode="decimal"
-            onChange={handleOnChange}
-            className="w-full rounded-tr-lg rounded-br-lg border-0 pb-0.5 text-right text-lg outline-none focus:ring-0 dark:bg-light-dark"
-            {...rest}
-          />
+          type="text"
+          value={value}
+          placeholder={placeholder}
+          inputMode="decimal"
+          onChange={handleOnChange}
+          className="w-full rounded-tr-lg rounded-br-lg border-0 pb-0.5 text-right text-lg outline-none focus:ring-0 dark:bg-light-dark"
+          {...rest}
+        />
         <div className="flex flex-1 flex-col text-right">
-          
           {/* <span className="font-xs px-3 text-gray-400">
             {rekening}
           </span> */}

@@ -15,9 +15,10 @@ import { indexOf } from 'lodash';
 
 const SwapPage: NextPageWithLayout = () => {
   const [buttonSwap, setButtonSwap] = useState({
-    id:'1',
-    name:'Swap',
+    id: '1',
+    name: 'Swap',
   });
+  const [coin, setCoin] = useState('');
   const [result, setResult] = useState(false);
   const [confirm, setConfirm] = useState(false);
   const [spinner, setSpinner] = useState(false);
@@ -31,8 +32,8 @@ const SwapPage: NextPageWithLayout = () => {
     market_value: '',
   });
   const setallert = async () => {
-    if(buttonSwap.id === '1'){
-      console.log(code, refrence,rekening);
+    if (buttonSwap.id === '1') {
+      console.log(code, refrence, rekening, coin);
       setSpinner(true);
       const response = await axios.get(
         'https://63c0cd6d71656267186d60c4.mockapi.io/price/1'
@@ -40,17 +41,17 @@ const SwapPage: NextPageWithLayout = () => {
       setCard(response.data);
       setSpinner(false);
       setResult(true);
-      setButtonSwap({
-        id:'2',
-        name:'Confirm',
-        });
+      // setButtonSwap({
+      //   id:'2',
+      //   name:'Confirm',
+      //   });
     }
-    if(buttonSwap.id === '2'){
+    if (buttonSwap.id === '2') {
       alert('YAXKKIINNNNNN?');
     }
   };
   const setconfirm = async () => {
-    console.log('confirm')
+    console.log('confirm');
   };
   let [toggleCoin, setToggleCoin] = useState(false);
 
@@ -92,7 +93,7 @@ const SwapPage: NextPageWithLayout = () => {
                 setRefrence(e.target.value);
               }}
             />
-            
+
             <RekInput
               label={'Rek Code'}
               exchangeRate={2.0}
@@ -103,9 +104,8 @@ const SwapPage: NextPageWithLayout = () => {
               onChange={(e) => {
                 setRekening(e.target.value);
               }}
-              
+              setCoin={setCoin}
             />
-            
           </div>
         </div>
         {spinner && <LinearProgress color="success" />}
@@ -127,10 +127,10 @@ const SwapPage: NextPageWithLayout = () => {
           className="mt-6 uppercase xs:mt-8 xs:tracking-widest"
           id={buttonSwap.id}
         >
-        {buttonSwap.name}
+          {buttonSwap.name}
         </Button>
       </Trade>
-      <div id='confirmed' className='modal fade'>
+      {/* <div id='confirmed' className='modal fade'>
           <div className='modal-dialog modal-confirm'>
             <div className='modal-content'>
               <div className='modal-header'>
@@ -177,7 +177,7 @@ const SwapPage: NextPageWithLayout = () => {
               </div>
             </div>
           </div>
-      </div>
+      </div> */}
     </>
   );
 };
