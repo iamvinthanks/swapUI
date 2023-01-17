@@ -66,7 +66,7 @@ export const menuItems = [
     href: routes.search,
   },
   {
-    name: 'Create NFT',
+    name: 'Create Escrow',
     icon: <PlusCircle />,
     href: routes.createNft,
   },

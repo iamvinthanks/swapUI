@@ -12,7 +12,8 @@ import Avatar7 from '@/assets/images/avatar/7.png';
 
 export const nftData = {
   isAuction: true,
-  name: 'Flow Punk Gallery #303',
+  buttonapprove:"Confirm Order",
+  name: 'Escrow Handuk Basah',
   image: SingleNft,
   minted_date: 'Jan 26, 2022',
   minted_slug: 'https://etherscan.io/',
