@@ -6,6 +6,7 @@ import { useContext, useEffect, useState } from 'react';
 import InputLabel from '@/components/ui/input-label';
 import Input from '@/components/ui/forms/input';
 import Password from '@/components/ui/forms/password';
+import axios from 'axios';
 
 export default function SelectWallet({ ...props }) {
   const { address, connectToWallet, error } = useContext(WalletContext);
@@ -14,11 +15,7 @@ export default function SelectWallet({ ...props }) {
     password: '',
   });
   const Login = () => {
-    if (dataLogin.email === '' || dataLogin.password === '') {
-      alert('Please fill in all the fields');
-    } else {
-      console.log(dataLogin);
-    }
+    const response = axios.post();
   };
   const { closeModal } = useModal();
   useEffect(() => {

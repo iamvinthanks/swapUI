@@ -74,7 +74,6 @@ export function Header() {
 
           <SearchButton variant="transparent" className="dark:text-white" />
         </div>
-
         <Login />
       </div>
     </nav>
