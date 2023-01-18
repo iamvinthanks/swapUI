@@ -29,10 +29,10 @@ const tradeMenu = [
     name: 'Help',
     value: routes.vote,
   },
-  {
-    name: 'Soon',
-    value: routes.vote,
-  },
+  // {
+  //   name: 'Soon',
+  //   value: routes.Soon,
+  // },
 ];
 
 function ActiveNavLink({ href, title, isActive, className }: any) {
@@ -82,7 +82,7 @@ export default function Trade({ children }: React.PropsWithChildren<{}>) {
               onSelect={(path) => handleRouteOnSelect(path)}
               className="w-full"
             >
-              <AnchorLink
+              {/* <AnchorLink
                 href={routes.charts}
                 className="inline-flex items-center justify-between gap-1.5 rounded-md px-3 py-2 text-gray-900 hover:bg-gray-100 dark:text-gray-100 dark:hover:bg-gray-700/70"
               >
@@ -92,7 +92,7 @@ export default function Trade({ children }: React.PropsWithChildren<{}>) {
               <button className="inline-flex items-center justify-between gap-1.5 rounded-md px-3 py-2 uppercase text-gray-900 hover:bg-gray-100 dark:text-gray-100 dark:hover:bg-gray-700/70">
                 Settings
                 <RangeIcon className="h-auto w-3" />
-              </button>
+              </button> */}
             </Listbox>
           )}
           <div className="hidden items-center justify-between text-gray-600 dark:text-gray-400 sm:flex">

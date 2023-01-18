@@ -10,6 +10,7 @@ import { useDrawer } from '@/components/drawer-views/context';
 // import Sidebar from '@/layouts/dashboard/_sidebar';
 import Sidebar from '@/layouts/sidebar/_default';
 import WalletConnect from '@/components/nft/wallet-connect';
+import { Hidden } from '@mui/material';
 
 function NotificationButton() {
   return (
@@ -30,7 +31,22 @@ function HeaderRightArea() {
     </div>
   );
 }
+function HeaderRightArea2() {
+  return (
+    <div className="relative order-last flex shrink-0 items-center gap-3 sm:gap-6 lg:gap-8">
+      <NotificationButton />
+    </div>
+  );
+}
+function Login() {
+  const [IsLogin, setIsLogin] = useState('logout');
 
+  if (IsLogin == 'login') {
+    return <HeaderRightArea />;
+  } else {
+    return <HeaderRightArea2 />;
+  }
+}
 export function Header() {
   const { openDrawer } = useDrawer();
   const isMounted = useIsMounted();
@@ -59,7 +75,7 @@ export function Header() {
           <SearchButton variant="transparent" className="dark:text-white" />
         </div>
 
-        <HeaderRightArea />
+        <Login />
       </div>
     </nav>
   );

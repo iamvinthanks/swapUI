@@ -9,20 +9,20 @@ import { Doge } from '@/components/icons/doge';
 export const coinList = [
   {
     icon: <Bitcoin />,
-    code: 'BTC',
-    name: 'Bitcoin',
+    code: '0',
+    name: 'Select Bank',
     price: 19076.29,
   },
   {
     icon: <Ethereum />,
-    code: 'ETH',
-    name: 'Ethereum',
+    code: '014',
+    name: 'BCA',
     price: 1053.28,
   },
   {
     icon: <Tether />,
-    code: 'USDT',
-    name: 'Tether USD',
+    code: '015',
+    name: 'MANDIRI',
     price: 0.999,
   },
   {

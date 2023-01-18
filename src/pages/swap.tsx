@@ -130,54 +130,6 @@ const SwapPage: NextPageWithLayout = () => {
           {buttonSwap.name}
         </Button>
       </Trade>
-      {/* <div id='confirmed' className='modal fade'>
-          <div className='modal-dialog modal-confirm'>
-            <div className='modal-content'>
-              <div className='modal-header'>
-                <div className='icon-box'>
-                  <i className='material-icons'>&#xE876;</i>
-                </div>
-                <h4 className='modal-title w-100'>Redeem Procesed</h4>
-              </div>
-              <div className='modal-body'>
-                <p className='text-center'>Pesanan Anda diterima dan sedang diproses oleh sistem</p>
-                <table>
-                <tr>
-                    <td>Nama </td>
-                    <td>: Rick Zolenda</td>
-                </tr>
-                <tr>
-                    <td>Jenis Rekening </td>
-                    <td>: BCA</td>
-                </tr>
-                <tr>
-                    <td>Nomor Rekening </td>
-                    <td>: 091721923123</td>
-                </tr>
-                <tr>
-                    <td>Gift Card Value(Crypto) </td>
-                    <td>: 1000 TRX</td>
-                </tr>
-                <tr>
-                    <td>Gift Card Value(IDR)</td>
-                    <td>: Rp 837.985</td>
-                </tr>
-                <tr>
-                    <td>Jumlah Diterima(+fee) </td>
-                    <td>: Rp 100.000</td>
-                </tr>
-                </table>
-                <div role={'separator'} className={'dropdown-divider'} />
-                <p className='text-center'>ID Transaksi</p>
-                <input type='text' className='form-control' value='123456789' readOnly />
-                <h5>IST-09812918391</h5>
-              </div>
-              <div className='modal-footer'>
-                <button className='btn btn-success btn-block' data-dismiss='modal'>Check Status Transaksi</button>
-              </div>
-            </div>
-          </div>
-      </div> */}
     </>
   );
 };

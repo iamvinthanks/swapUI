@@ -16,7 +16,6 @@ import 'swiper/css';
 import '@/assets/css/scrollbar.css';
 import '@/assets/css/globals.css';
 import '@/assets/css/range-slider.css';
-import './confirmed.css';
 
 type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;

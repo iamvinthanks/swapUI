@@ -76,7 +76,7 @@ export default function RekInput({
             id="type_rekening"
           >
             {selectedCoin?.icon}{' '}
-            <span className="ltr:ml-2 rtl:mr-2">{selectedCoin?.code} </span>
+            <span className="ltr:ml-2 rtl:mr-2">{selectedCoin?.name} </span>
             <ChevronDown className="ltr:ml-1.5 rtl:mr-1.5" />
           </button>
         </div>
