@@ -17,9 +17,9 @@ import { Close } from '@/components/icons/close';
 import { PlusCircle } from '@/components/icons/plus-circle';
 import { CompassIcon } from '@/components/icons/compass';
 import { InfoCircle } from '@/components/icons/info-circle';
-
 //images
 import AuthorImage from '@/assets/images/author.jpg';
+import axios from 'axios';
 
 export const menuItems = [
   {
@@ -107,6 +107,21 @@ type SidebarProps = {
 
 export default function Sidebar({ className }: SidebarProps) {
   const { closeDrawer } = useDrawer();
+  const profile = async () => {
+    const res = await axios
+      .get('https://api.github.com/users/vercel', {
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem('token')}`,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <aside
       className={cn(
@@ -132,11 +147,7 @@ export default function Sidebar({ className }: SidebarProps) {
 
       <Scrollbar style={{ height: 'calc(100% - 96px)' }}>
         <div className="px-6 pb-5 2xl:px-8">
-          <AuthorCard
-            image={AuthorImage}
-            name="Cameron Williamson"
-            role="admin"
-          />
+          <AuthorCard image={AuthorImage} name="John Doe" />
 
           <div className="mt-12">
             {menuItems.map((item, index) => (

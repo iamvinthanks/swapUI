@@ -14,8 +14,19 @@ export default function SelectWallet({ ...props }) {
     email: '',
     password: '',
   });
-  const Login = () => {
-    const response = axios.post();
+  const Login = async () => {
+    const response = await axios
+      .post('http://10.10.1.42:8000/api/auth/admin/login', {
+        email: dataLogin.email,
+        password: dataLogin.password,
+      })
+      .then((response) => {
+        console.log(response.data.data.token);
+        window.sessionStorage.setItem('token', response.data.data.token);
+      })
+      .catch((error) => {
+        console.log(error.response.data.message);
+      });
   };
   const { closeModal } = useModal();
   useEffect(() => {

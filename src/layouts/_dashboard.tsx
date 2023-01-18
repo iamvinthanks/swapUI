@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import cn from 'classnames';
 import { useWindowScroll } from '@/lib/hooks/use-window-scroll';
 import { FlashIcon } from '@/components/icons/flash';
@@ -11,6 +11,7 @@ import { useDrawer } from '@/components/drawer-views/context';
 import Sidebar from '@/layouts/sidebar/_default';
 import WalletConnect from '@/components/nft/wallet-connect';
 import { Hidden } from '@mui/material';
+import axios from 'axios';
 
 function NotificationButton() {
   return (
@@ -38,21 +39,40 @@ function HeaderRightArea2() {
     </div>
   );
 }
-function Login() {
-  const [IsLogin, setIsLogin] = useState('logout');
 
-  if (IsLogin == 'login') {
-    return <HeaderRightArea />;
-  } else {
-    return <HeaderRightArea2 />;
-  }
-}
 export function Header() {
+  const [IsLogin, setIsLogin] = useState(false);
+  const profile = async () => {
+    const res = await axios
+      .get('http://10.10.1.42:8000/api/my-profile/', {
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem('token')}`,
+        },
+      })
+      .then((res) => {
+        setIsLogin(true);
+        console.log(res.data);
+      })
+      .catch((err) => {
+        setIsLogin(false);
+        console.log(err);
+      });
+  };
+  useEffect(() => {
+    profile();
+  }, []);
+
   const { openDrawer } = useDrawer();
   const isMounted = useIsMounted();
   let windowScroll = useWindowScroll();
-  let [isOpen, setIsOpen] = useState(false);
-
+  let [isOpen, setIsOpen] = useState();
+  function Login() {
+    if (IsLogin === false) {
+      return <HeaderRightArea />;
+    } else {
+      return <HeaderRightArea2 />;
+    }
+  }
   return (
     <nav
       className={`fixed top-0 z-30 w-full transition-all duration-300 ltr:right-0 rtl:left-0 ltr:xl:pl-72 rtl:xl:pr-72 ltr:2xl:pl-80 rtl:2xl:pr-80 ${

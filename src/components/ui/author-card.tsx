@@ -4,10 +4,9 @@ import { StaticImageData } from 'next/image';
 type AuthorCardProps = {
   image: StaticImageData;
   name?: string;
-  role?: string;
 };
 
-export default function AuthorCard({ image, name, role }: AuthorCardProps) {
+export default function AuthorCard({ image, name }: AuthorCardProps) {
   return (
     <div
       className={`flex items-center rounded-lg  ${
@@ -26,7 +25,7 @@ export default function AuthorCard({ image, name, role }: AuthorCardProps) {
           {name}
         </h3>
         <span className="mt-1 block text-xs text-gray-600 dark:text-gray-400">
-          {role}
+          <span className="ltr:mr-1 rtl:ml-1">LOGOUT</span>
         </span>
       </div>
     </div>
