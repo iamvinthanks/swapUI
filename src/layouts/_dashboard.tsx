@@ -47,7 +47,7 @@ export function Header() {
   });
   const profile = async () => {
     const res = await axios
-      .get('https://bc93-61-247-11-213.ap.ngrok.io/api/my-profile/', {
+      .get('http://103.119.66.162:5000/api/my-profile/', {
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem('token')}`,
         },
