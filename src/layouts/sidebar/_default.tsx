@@ -114,6 +114,8 @@ export default function Sidebar({ className, name }: SidebarProps) {
   useEffect(() => {
     if (name !== null) {
       setUserprofil(true);
+    }else{
+      setUserprofil(false);
     }
   }, [name]);
 

@@ -136,7 +136,7 @@ export default function Sidebar({ className }: SidebarProps) {
           <AuthorCard
             image={AuthorImage}
             name="Cameron Williamson"
-            role="admin"
+          
           />
 
           <div className="mt-12">

@@ -47,7 +47,7 @@ export function Header() {
   });
   const profile = async () => {
     const res = await axios
-      .get(`${process.env.NEXT_PUBLIC_BASE_URL}` + '/api/my-profile/', {
+      .get(`${process.env.NEXT_PUBLIC_BASE_URL}` + '/api/profile/', {
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem('token')}`,
         },
@@ -113,7 +113,7 @@ export default function Layout({
   const [name, setname] = useState(null);
   const profile = async () => {
     const res = await axios
-      .get(`${process.env.NEXT_PUBLIC_BASE_URL}` + '/api/my-profile/', {
+      .get(`${process.env.NEXT_PUBLIC_BASE_URL}` + '/api/profile/', {
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem('token')}`,
         },
@@ -121,7 +121,9 @@ export default function Layout({
       .then((res) => {
         setname(res.data.data.name);
       })
-      .catch((err) => {});
+      .catch((err) => {
+        setname(null);
+      });
   };
   useEffect(() => {
     profile();

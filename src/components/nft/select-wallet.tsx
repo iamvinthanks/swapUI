@@ -21,17 +21,18 @@ export default function SelectWallet({ ...props }) {
     setloading(true);
     setloginbutton(false);
     const response = await axios
-      .post(`${process.env.NEXT_PUBLIC_BASE_URL}` + '/api/auth/admin/login', {
+      .post(`${process.env.NEXT_PUBLIC_BASE_URL}` + '/api/login', {
         email: dataLogin.email,
         password: dataLogin.password,
       })
       .then((response) => {
-        window.sessionStorage.setItem('token', response.data.data.token);
-        window.sessionStorage.setItem('name', response.data.data.name);
+        window.sessionStorage.setItem('token', response.data.access_token);
+        window.sessionStorage.setItem('name', 'Alvinnasa');
         window.location.reload();
       })
       .catch((error) => {
-        console.log(error.response.data.message);
+        setloginbutton(true);
+        setloading(false);
       });
   };
   const { closeModal } = useModal();
