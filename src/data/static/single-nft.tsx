@@ -12,14 +12,14 @@ import Avatar7 from '@/assets/images/avatar/7.png';
 
 export const nftData = {
   isAuction: true,
-  buttonapprove:"Confirm Order",
+  buttonapprove: 'Confirm Order',
   name: 'Escrow Handuk Basah',
   image: SingleNft,
   minted_date: 'Jan 26, 2022',
   minted_slug: 'https://etherscan.io/',
   price: 0.2,
   description:
-    'Fisherian Runaways, Child of #48 Bat Veil & #42 Screw Nose. This mushroom is the result of the cross-breeding of two original one of a kind generative mushrooms donated back to the Fisherian Runaways project their generous owner.',
+    'Produk ini dikirim dengan jne dan jnt apa bila ada kerusakan barang akan di ganti dengan barang yang baru, namun harus menyertakan video unboxing dan foto barang yang rusak, jika barang yang rusak tidak ada video unboxing dan foto barang yang rusak maka barang tidak akan di ganti',
   creator: { id: 1, logo: Avatar1, name: '@Cameronwilliamson', slug: '#' },
   collection: { id: 1, logo: Avatar3, name: 'Criptic', slug: '#' },
   owner: { id: 1, logo: Avatar4, name: '@williamson', slug: '#' },

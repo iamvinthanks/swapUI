@@ -14,7 +14,7 @@ import { useModal } from '@/components/modal-views/context';
 import { nftData } from '@/data/static/single-nft';
 import NftDropDown from './nft-dropdown';
 import Avatar from '@/components/ui/avatar';
-import { useEffect,useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 interface NftFooterProps {
@@ -32,18 +32,17 @@ function NftFooter({
   isAuction,
   price,
 }: NftFooterProps) {
-  
   const { openModal } = useModal();
-  const [Usertype,setUserType] = useState('seller');
+  const [Usertype, setUserType] = useState('seller');
   const [approve, setApprove] = useState('');
   useEffect(() => {
     if (Usertype === 'seller') {
       setApprove('Confirm Order Procesed');
     }
-    if (Usertype === 'buyer'){
+    if (Usertype === 'buyer') {
       setApprove('Approve Payment');
     }
-  },[Usertype]); 
+  }, [Usertype]);
 
   return (
     <div
@@ -166,45 +165,30 @@ export default function NftDetails({ product }: { product: NftDetailsProps }) {
                   <NftDropDown />
                 </div>
               </div>
-              
-                Transaksi Dibuat {minted_date}
+              Transaksi Dibuat {minted_date}
               <div className="mt-4 flex flex-wrap gap-6 pt-0.5 lg:-mx-6 lg:mt-6 lg:gap-0">
                 <div className="shrink-0 border-dashed border-gray-200 dark:border-gray-700 lg:px-6 lg:ltr:border-r lg:rtl:border-l">
                   <h3 className="text-heading-style mb-2 uppercase text-gray-900 dark:text-white">
                     Seller
                   </h3>
-                    <ListCard
-                      item={creator}
-                      className="rounded-full p-2 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
-                    />
-                    <h3 className="text-heading-style mb-2 mt-3 uppercase text-gray-900 dark:text-white">
-                    Status
-                  </h3>
-                    <ListCard
-                      item={creator}
-                      className="rounded-full p-2 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
-                    />
+                  <ListCard
+                    item={creator}
+                    className="rounded-full p-2 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+                  />
                 </div>
-                
+
                 <div className="shrink-0 lg:px-6">
                   <h3 className="text-heading-style mb-2.5 uppercase text-gray-900 dark:text-white">
                     Buyer
                   </h3>
-                    <ListCard
-                      item={collection}
-                      className="rounded-full p-2 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
-                    />
-                      <h3 className="text-heading-style mt-3 mb-2.5 uppercase text-gray-900 dark:text-white">
-                    Status
-                  </h3>
-                    <ListCard
-                      item={collection}
-                      className="rounded-full p-2 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
-                    />
+                  <ListCard
+                    item={collection}
+                    className="rounded-full p-2 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+                  />
                 </div>
               </div>
             </div>
-            {/* <div className="mt-5 flex flex-col pb-5 xl:mt-9">
+            <div className="mt-5 flex flex-col pb-5 xl:mt-9">
               <ParamTab
                 tabMenu={[
                   {
@@ -235,14 +219,14 @@ export default function NftDetails({ product }: { product: NftDetailsProps }) {
                       <h3 className="text-heading-style mb-2 uppercase text-gray-900 dark:text-white">
                         Owner
                       </h3>
-                      <AnchorLink href={owner?.slug} className="inline-block">
+                      {/* <AnchorLink href={owner?.slug} className="inline-block">
                         <ListCard
                           item={owner}
                           className="rounded-full p-2 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
                         />
-                      </AnchorLink>
+                      </AnchorLink> */}
                     </div>
-                    <div className="block">
+                    {/* <div className="block">
                       <h3 className="text-heading-style mb-2 uppercase text-gray-900 dark:text-white">
                         Block Chain
                       </h3>
@@ -260,7 +244,7 @@ export default function NftDetails({ product }: { product: NftDetailsProps }) {
                           </AnchorLink>
                         ))}
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                 </TabPanel>
                 <TabPanel className="focus:outline-none">
@@ -286,7 +270,7 @@ export default function NftDetails({ product }: { product: NftDetailsProps }) {
                   </div>
                 </TabPanel>
               </ParamTab>
-            </div> */}
+            </div>
           </div>
           <NftFooter
             className="hidden md:block"
