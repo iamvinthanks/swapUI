@@ -20,6 +20,7 @@ import { InfoCircle } from '@/components/icons/info-circle';
 //images
 import AuthorImage from '@/assets/images/author.jpg';
 import axios from 'axios';
+import { useEffect, useState } from 'react';
 
 export const menuItems = [
   {
@@ -107,20 +108,6 @@ type SidebarProps = {
 
 export default function Sidebar({ className }: SidebarProps) {
   const { closeDrawer } = useDrawer();
-  const profile = async () => {
-    const res = await axios
-      .get('https://api.github.com/users/vercel', {
-        headers: {
-          Authorization: `Bearer ${sessionStorage.getItem('token')}`,
-        },
-      })
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
 
   return (
     <aside

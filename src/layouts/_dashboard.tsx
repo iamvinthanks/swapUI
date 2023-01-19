@@ -42,16 +42,19 @@ function HeaderRightArea2() {
 
 export function Header() {
   const [IsLogin, setIsLogin] = useState(false);
+  const [UserProfile, setUserProfile] = useState({
+    name: '',
+  });
   const profile = async () => {
     const res = await axios
-      .get('http://10.10.1.42:8000/api/my-profile/', {
+      .get('https://bc93-61-247-11-213.ap.ngrok.io/api/my-profile/', {
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem('token')}`,
         },
       })
       .then((res) => {
         setIsLogin(true);
-        console.log(res.data);
+        setUserProfile(res.data.data.name);
       })
       .catch((err) => {
         setIsLogin(false);
