@@ -42,12 +42,13 @@ function HeaderRightArea2() {
 
 export function Header() {
   const [IsLogin, setIsLogin] = useState(false);
+  console.log('ENV AKU', `${process.env.NEXT_PUBLIC_BASE_URL}`);
   const [UserProfile, setUserProfile] = useState({
     name: '',
   });
   const profile = async () => {
     const res = await axios
-      .get('http://10.10.1.42:8000/api/my-profile/', {
+      .get(`${process.env.NEXT_PUBLIC_BASE_URL}` + '/api/my-profile/', {
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem('token')}`,
         },
@@ -58,7 +59,6 @@ export function Header() {
       })
       .catch((err) => {
         setIsLogin(false);
-        console.log('error');
       });
   };
   useEffect(() => {
@@ -114,7 +114,7 @@ export default function Layout({
   const [name, setname] = useState(null);
   const profile = async () => {
     const res = await axios
-      .get(`${process.env.BASE_URL}` + '/api/my-profile/', {
+      .get(`${process.env.NEXT_PUBLIC_BASE_URL}` + '/api/my-profile/', {
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem('token')}`,
         },
@@ -122,9 +122,7 @@ export default function Layout({
       .then((res) => {
         setname(res.data.data.name);
       })
-      .catch((err) => {
-        console.log('error');
-      });
+      .catch((err) => {});
   };
   useEffect(() => {
     profile();
