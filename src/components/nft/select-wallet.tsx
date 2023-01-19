@@ -21,7 +21,7 @@ export default function SelectWallet({ ...props }) {
     setloading(true);
     setloginbutton(false);
     const response = await axios
-      .post('http://10.10.1.42:8000/api/auth/admin/login', {
+      .post(`${process.env.BASE_URL}` + '/api/auth/admin/login', {
         email: dataLogin.email,
         password: dataLogin.password,
       })
