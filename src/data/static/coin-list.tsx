@@ -10,7 +10,7 @@ export const coinList = [
   {
     icon: <Bitcoin />,
     code: '0',
-    name: 'Select Bank',
+    name: 'Code',
     price: 19076.29,
   },
   {

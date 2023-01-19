@@ -7,6 +7,7 @@ import InputLabel from '@/components/ui/input-label';
 import Input from '@/components/ui/forms/input';
 import Password from '@/components/ui/forms/password';
 import axios from 'axios';
+import CircularProgress from '@mui/material/CircularProgress';
 
 export default function SelectWallet({ ...props }) {
   const { address, connectToWallet, error } = useContext(WalletContext);
@@ -14,15 +15,20 @@ export default function SelectWallet({ ...props }) {
     email: '',
     password: '',
   });
+  const [loginbutton, setloginbutton] = useState(true);
+  const [loading, setloading] = useState(false);
   const Login = async () => {
+    setloading(true);
+    setloginbutton(false);
     const response = await axios
-      .post('https://bc93-61-247-11-213.ap.ngrok.io/api/auth/admin/login', {
+      .post('http://10.10.1.42:8000/api/auth/admin/login', {
         email: dataLogin.email,
         password: dataLogin.password,
       })
       .then((response) => {
-        console.log(response.data.data.token);
         window.sessionStorage.setItem('token', response.data.data.token);
+        window.sessionStorage.setItem('name', response.data.data.name);
+        window.location.reload();
       })
       .catch((error) => {
         console.log(error.response.data.message);
@@ -62,32 +68,32 @@ export default function SelectWallet({ ...props }) {
           }}
         />
       </div>
-      <button
-        className="h-12 w-full rounded-lg bg-gray-900 text-sm font-medium uppercase tracking-wider text-white hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-opacity-50"
-        onClick={Login}
-      >
-        Login
-      </button>
-      <div className="m-8 flex items-center justify-center">
+      <div className="mt-4 mb-4 flex items-center justify-center">
+        {loading && <CircularProgress className="text-center" />}
+        {loginbutton && (
+          <button
+            className="h-12 w-full rounded-lg bg-gray-900 text-sm font-medium uppercase tracking-wider text-white hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-opacity-50"
+            onClick={Login}
+          >
+            Login
+          </button>
+        )}
+      </div>
+      <div className="mt-4 mb-4 flex items-center justify-center">
         <div className="w-1/5 border-b border-gray-300 dark:border-gray-700" />
         <div className="mx-4 text-sm text-gray-500 dark:text-gray-400">
           Create Account ?
         </div>
         <div className="w-1/5 border-b border-gray-300 dark:border-gray-700" />
       </div>
-      <button
-        className="h-12 w-full rounded-lg bg-gray-900 text-sm font-medium uppercase tracking-wider text-white hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-opacity-50"
-        onClick={connectToWallet}
-      >
-        Register
-      </button>
-
-      {error && (
-        <p className="mt-3 text-center text-xs text-red-500">
-          Please install Metamask plugin in your browser in order to connect
-          wallet.
-        </p>
-      )}
+      <div className="mt-4 mb-4 flex items-center justify-center">
+        <button
+          className="h-12 w-full rounded-lg bg-gray-900 text-sm font-medium uppercase tracking-wider text-white hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-opacity-50"
+          // onClick={connectToWallet}
+        >
+          Register
+        </button>
+      </div>
     </div>
   );
 }

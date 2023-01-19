@@ -47,8 +47,6 @@ const PriceOptions = [
   },
 ];
 
-
-
 type PriceTypeProps = {
   value: string;
   onChange: (value: string) => void;
@@ -91,28 +89,31 @@ const CreateNFTPage: NextPageWithLayout = () => {
   const [amount, setAmount] = useState('');
   const [coin, setCoin] = useState('');
   const createescrow = async () => {
-    const response = await axios.post('http://192.168.177.42:8001/api/createescrow', {
-      amount: amount,
-      rek_seller: rekening,
-      id_rek_seller: coin,
-      fee_from_buyer: explicit,
-    },
-    {
-      headers: {
-        'content-type': 'application/json',
-        'Authorization': `Bearer 7|bn4T4znq2EDHtJB2xMd2QgSWw6fIqWxj5ZfcOHpH` 
-      }
-    })
-    .then(function (response) {
-      console.log(response);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-
+    const response = await axios
+      .post(
+        'http://192.168.177.42:8001/api/createescrow',
+        {
+          amount: amount,
+          rek_seller: rekening,
+          id_rek_seller: coin,
+          fee_from_buyer: explicit,
+        },
+        {
+          headers: {
+            'content-type': 'application/json',
+            Authorization: `Bearer 7|bn4T4znq2EDHtJB2xMd2QgSWw6fIqWxj5ZfcOHpH`,
+          },
+        }
+      )
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
 
     // console.log(amount,rekening,coin,explicit)
-  }
+  };
 
   return (
     <>
@@ -129,19 +130,19 @@ const CreateNFTPage: NextPageWithLayout = () => {
             {/* File uploader */}
             <div className="mb-12">
               <InputLabel title="Upload Item" important />
-              {/* <Uploader /> */}
+              <Uploader />
             </div>
           </div>
         </div>
         {/* Title */}
 
         <div className="mb-8">
-          <InputLabel title="Title Escrow" important />
+          <InputLabel title="Judul Escrow" important />
           <Input
             value={amount}
             min={0}
             type="number"
-            placeholder="Enter your price"
+            placeholder="Masukan Judul Transaksi  "
             inputClassName="spin-button-hidden"
             onChange={(e) => {
               setAmount(e.target.value);
@@ -163,19 +164,19 @@ const CreateNFTPage: NextPageWithLayout = () => {
           />
         </div>
         <div className="mb-8">
-        <InputLabel title="rekening Pencairan" important />
-        <RekInput
-        label={'Rek Code'}
-        exchangeRate={2.0}
-        title={'Rekening'}
-        placeholder={'Input Rekening'}
-        getCoinValue={(data) => console.log(data)}
-        value={rekening}
-        onChange={(e) => {
-          setRekening(e.target.value);
-        }}
-        setCoin={setCoin}
-      />
+          <InputLabel title="rekening Pencairan" important />
+          <RekInput
+            label={'Rek Code'}
+            exchangeRate={2.0}
+            title={'Rekening'}
+            placeholder={'Input Rekening'}
+            getCoinValue={(data) => console.log(data)}
+            value={rekening}
+            onChange={(e) => {
+              setRekening(e.target.value);
+            }}
+            setCoin={setCoin}
+          />
         </div>
 
         {/* Explicit content */}
@@ -189,10 +190,9 @@ const CreateNFTPage: NextPageWithLayout = () => {
           />
         </div>
 
-        <Button shape="rounded"
-        onClick={createescrow}
-        >
-        CREATE</Button>
+        <Button shape="rounded" onClick={createescrow}>
+          CREATE
+        </Button>
       </div>
     </>
   );

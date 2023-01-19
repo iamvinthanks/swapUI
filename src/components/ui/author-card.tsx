@@ -3,7 +3,7 @@ import { StaticImageData } from 'next/image';
 
 type AuthorCardProps = {
   image: StaticImageData;
-  name?: string;
+  name?: string | null;
 };
 
 export default function AuthorCard({ image, name }: AuthorCardProps) {

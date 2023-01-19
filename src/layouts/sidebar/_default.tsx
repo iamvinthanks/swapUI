@@ -104,10 +104,18 @@ export const menuItems = [
 
 type SidebarProps = {
   className?: string;
+  name: string | null;
 };
 
-export default function Sidebar({ className }: SidebarProps) {
+export default function Sidebar({ className, name }: SidebarProps) {
   const { closeDrawer } = useDrawer();
+  // const [user, setUser] = useState('John Doe');
+  const [userprofil, setUserprofil] = useState(false);
+  useEffect(() => {
+    if (name !== null) {
+      setUserprofil(true);
+    }
+  }, []);
 
   return (
     <aside
@@ -134,8 +142,7 @@ export default function Sidebar({ className }: SidebarProps) {
 
       <Scrollbar style={{ height: 'calc(100% - 96px)' }}>
         <div className="px-6 pb-5 2xl:px-8">
-          <AuthorCard image={AuthorImage} name="John Doe" />
-
+          {userprofil && <AuthorCard image={AuthorImage} name={name} />}
           <div className="mt-12">
             {menuItems.map((item, index) => (
               <MenuItem

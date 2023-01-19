@@ -47,7 +47,7 @@ export function Header() {
   });
   const profile = async () => {
     const res = await axios
-      .get('http://103.119.66.162:5000/api/my-profile/', {
+      .get('http://10.10.1.42:8000/api/my-profile/', {
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem('token')}`,
         },
@@ -58,7 +58,7 @@ export function Header() {
       })
       .catch((err) => {
         setIsLogin(false);
-        console.log(err);
+        console.log('error');
       });
   };
   useEffect(() => {
@@ -111,10 +111,28 @@ export default function Layout({
   children,
   contentClassName,
 }: React.PropsWithChildren<DashboardLayoutProps>) {
+  const [name, setname] = useState(null);
+  const profile = async () => {
+    const res = await axios
+      .get('http://10.10.1.42:8000/api/my-profile/', {
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem('token')}`,
+        },
+      })
+      .then((res) => {
+        setname(res.data.data.name);
+      })
+      .catch((err) => {
+        console.log('error');
+      });
+  };
+  useEffect(() => {
+    profile();
+  }, []);
   return (
     <div className="ltr:xl:pl-72 rtl:xl:pr-72 ltr:2xl:pl-80 rtl:2xl:pr-80">
       <Header />
-      <Sidebar className="hidden xl:block" />
+      <Sidebar className="hidden xl:block" name={name} />
       <main
         className={cn(
           'min-h-[100vh] px-4 pt-24 pb-16 sm:px-6 sm:pb-20 lg:px-8 xl:px-10 xl:pb-24 3xl:px-12',
