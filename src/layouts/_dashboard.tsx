@@ -42,7 +42,6 @@ function HeaderRightArea2() {
 
 export function Header() {
   const [IsLogin, setIsLogin] = useState(false);
-  console.log('ENV AKU', `${process.env.NEXT_PUBLIC_BASE_URL}`);
   const [UserProfile, setUserProfile] = useState({
     name: '',
   });

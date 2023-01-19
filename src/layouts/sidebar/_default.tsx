@@ -115,7 +115,7 @@ export default function Sidebar({ className, name }: SidebarProps) {
     if (name !== null) {
       setUserprofil(true);
     }
-  }, []);
+  }, [name]);
 
   return (
     <aside
