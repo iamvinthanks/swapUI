@@ -114,7 +114,7 @@ export default function Layout({
   const [name, setname] = useState(null);
   const profile = async () => {
     const res = await axios
-      .get('http://10.10.1.42:8000/api/my-profile/', {
+      .get(`${process.env.BASE_URL}` + '/api/my-profile/', {
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem('token')}`,
         },
