@@ -18,11 +18,11 @@ const Listbox = dynamic(() => import('@/components/ui/list-box'));
 
 const tradeMenu = [
   {
-    name: 'Redeem',
+    name: 'Redeem Gift Card',
     value: routes.swap,
   },
   {
-    name: 'Buy Crypto',
+    name: 'Buy Gift Card',
     value: routes.liquidity,
   },
   {

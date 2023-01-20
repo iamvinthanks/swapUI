@@ -52,7 +52,7 @@ export const menuItems = [
     href: routes.farms,
   },
   {
-    name: 'Redeem',
+    name: 'Binance Gift Card',
     icon: <ExchangeIcon />,
     href: routes.swap,
   },
@@ -114,7 +114,7 @@ export default function Sidebar({ className, name }: SidebarProps) {
   useEffect(() => {
     if (name !== null) {
       setUserprofil(true);
-    }else{
+    } else {
       setUserprofil(false);
     }
   }, [name]);
