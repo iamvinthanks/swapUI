@@ -41,29 +41,9 @@ function HeaderRightArea2() {
 }
 
 export function Header() {
-  const [IsLogin, setIsLogin] = useState(false);
   const [UserProfile, setUserProfile] = useState({
-    name: '',
-  });
-  const profile = async () => {
-    const res = await axios
-      .get(`${process.env.NEXT_PUBLIC_BASE_URL}` + '/api/profile/', {
-        headers: {
-          Authorization: `Bearer ${sessionStorage.getItem('token')}`,
-        },
-      })
-      .then((res) => {
-        setIsLogin(true);
-        setUserProfile(res.data.data.name);
-      })
-      .catch((err) => {
-        setIsLogin(false);
-      });
-  };
-  useEffect(() => {
-    profile();
-  }, []);
 
+  });
   const { openDrawer } = useDrawer();
   const isMounted = useIsMounted();
   let windowScroll = useWindowScroll();
@@ -75,6 +55,25 @@ export function Header() {
       return <HeaderRightArea2 />;
     }
   }
+  const [IsLogin, setIsLogin] = useState(true);
+  const profile = async () => {
+    const res = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}` + '/api/profile/', {
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem('token')}`,
+        },
+      })
+      .then((res) => {
+        // setUserProfile(res.data.data.name);
+        setIsLogin(true);
+      })
+      .catch((err) => {
+        setIsLogin(false);
+      });
+  };
+  useEffect(() => {
+    profile();
+  }, []);
+
   return (
     <nav
       className={`fixed top-0 z-30 w-full transition-all duration-300 ltr:right-0 rtl:left-0 ltr:xl:pl-72 rtl:xl:pr-72 ltr:2xl:pl-80 rtl:2xl:pr-80 ${
@@ -110,28 +109,28 @@ export default function Layout({
   children,
   contentClassName,
 }: React.PropsWithChildren<DashboardLayoutProps>) {
-  const [name, setname] = useState(null);
-  const profile = async () => {
-    const res = await axios
-      .get(`${process.env.NEXT_PUBLIC_BASE_URL}` + '/api/profile/', {
-        headers: {
-          Authorization: `Bearer ${sessionStorage.getItem('token')}`,
-        },
-      })
-      .then((res) => {
-        setname(res.data.data.name);
-      })
-      .catch((err) => {
-        setname(null);
-      });
-  };
-  useEffect(() => {
-    profile();
-  }, []);
+  const [name, setname] = useState("wawan");
+  // const profile = async () => {
+  //   const res = await axios
+  //     .get(`${process.env.NEXT_PUBLIC_BASE_URL}` + '/api/profile/', {
+  //       headers: {
+  //         Authorization: `Bearer ${sessionStorage.getItem('token')}`,
+  //       },
+  //     })
+  //     .then((res) => {
+  //       setname(res.data.data.name);
+  //     })
+  //     .catch((err) => {
+  //       setname(null);
+  //     });
+  // };
+  // useEffect(() => {
+  //   profile();
+  // }, []);
   return (
     <div className="ltr:xl:pl-72 rtl:xl:pr-72 ltr:2xl:pl-80 rtl:2xl:pr-80">
       <Header />
-      <Sidebar className="hidden xl:block" name={name} />
+      <Sidebar className="hidden xl:block" name="{name}" />
       <main
         className={cn(
           'min-h-[100vh] px-4 pt-24 pb-16 sm:px-6 sm:pb-20 lg:px-8 xl:px-10 xl:pb-24 3xl:px-12',

@@ -55,27 +55,49 @@ export const menuItems = [
     name: 'Binance Gift Card',
     icon: <ExchangeIcon />,
     href: routes.swap,
+    dropdownItems: [
+      {
+        name: 'Redeem Gift Card',
+        href: routes.swap,
+      },
+      {
+        name: 'Buy Gift Card',
+        href: routes.liquidity,
+      },
+    ],
   },
+  // {
+  //   name: 'Liquidity',
+  //   icon: <PoolIcon />,
+  //   href: routes.liquidity,
+  // },
+  // {
+  //   name: 'Explore NFTs',
+  //   icon: <CompassIcon />,
+  //   href: routes.search,
+  // },
   {
-    name: 'Liquidity',
-    icon: <PoolIcon />,
-    href: routes.liquidity,
-  },
-  {
-    name: 'Explore NFTs',
-    icon: <CompassIcon />,
-    href: routes.search,
-  },
-  {
-    name: 'Create Escrow',
+    name: 'Escrow',
     icon: <PlusCircle />,
     href: routes.createNft,
+    dropdownItems: [
+      {
+        name: 'Create Escrow',
+        href: routes.createNft,
+      },
+      {
+        name: 'Join Escrow',
+        href: routes.createProposal,
+      },
+      {
+        name: 'Escrow Details',
+        // icon: <DiskIcon />,
+        href: routes.nftDetails,
+      },
+    ],
+    
   },
-  {
-    name: 'NFT Details',
-    icon: <DiskIcon />,
-    href: routes.nftDetails,
-  },
+
   {
     name: 'Profile',
     icon: <ProfileIcon />,
@@ -110,7 +132,7 @@ type SidebarProps = {
 export default function Sidebar({ className, name }: SidebarProps) {
   const { closeDrawer } = useDrawer();
   // const [user, setUser] = useState('John Doe');
-  const [userprofil, setUserprofil] = useState(false);
+  const [userprofil, setUserprofil] = useState(true);
   useEffect(() => {
     if (name !== null) {
       setUserprofil(true);
@@ -144,7 +166,6 @@ export default function Sidebar({ className, name }: SidebarProps) {
 
       <Scrollbar style={{ height: 'calc(100% - 96px)' }}>
         <div className="px-6 pb-5 2xl:px-8">
-          {userprofil && <AuthorCard image={AuthorImage} name={name} />}
           <div className="mt-12">
             {menuItems.map((item, index) => (
               <MenuItem

@@ -7,8 +7,47 @@ import TransactionInfo from '@/components/ui/transaction-info';
 import { Plus } from '@/components/icons/plus';
 import ActiveLink from '@/components/ui/links/active-link';
 import Trade from '@/components/ui/trade';
+import RekInput from '@/components/ui/rek-input';
+import LinearProgress from '@mui/material/LinearProgress';
+import { SetStateAction, useEffect, useState } from 'react';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
 const LiquidityPage: NextPageWithLayout = () => {
+  const [age, setAge] = useState('');
+  const handleChange = (event: { target: { value: SetStateAction<string>; }; }) => {
+    setAge(event.target.value);
+  };
+  const [Jumlah, setJumlah] = useState('');
+  const [refrence, setRefrence] = useState('');
+  const [rekening, setRekening] = useState('');
+  const [coin, setCoin] = useState('');
+  const [result, setResult] = useState(true);
+  const [spinner, setSpinner] = useState(false);
+  const [rate, setRate] = useState(0);
+  const[total, setTotal] = useState('');
+  const [card, setCard] = useState({
+    idr_value: '0',
+    crypto_value: '0',
+    bersih: '',
+    market_value: '',
+  });
+  const calculate = async () => {
+    console.log(age)
+    // const res = await fetch(
+    //   `https://indodax.com/api/usdt_idr/ticker`
+    //   )
+    //   const data = await res.json();
+    //   setRate(data.ticker.high)
+    //   setTotal((parseFloat(Jumlah) / parseFloat(data.ticker.high)).toFixed(8))
+  }
+  
+
+  
+
+  
   return (
     <>
       <NextSeo
@@ -18,49 +57,71 @@ const LiquidityPage: NextPageWithLayout = () => {
       <Trade>
         <div className="mb-5 border-b border-dashed border-gray-200 pb-5 dark:border-gray-800 xs:mb-7 xs:pb-6">
           <div className="relative flex flex-col gap-3">
-            <CoinInput
-              label={'From'}
-              exchangeRate={0.0}
-              defaultCoinIndex={0}
-              getCoinValue={(data) => console.log('From coin value:', data)}
+          <CoinInput
+              label={'Jumlah'}
+              exchangeRate={1.0}
+              title={'IDR'}
+              type={'number'}
+              // defaultCoinIndex={0}
+              placeholder={'Jumlah'}
+              getCoinValue={(code) => console.log('From coin value:', code)}
+              value={Jumlah}
+              onChange={(e) => {
+                setJumlah(e.target.value);
+              }}
             />
-            <div className="absolute top-1/2 left-1/2 z-[1] -mt-4 -ml-4 rounded-full bg-white shadow-large dark:bg-gray-600">
-              <Button
-                size="mini"
-                color="gray"
-                shape="circle"
-                variant="transparent"
-              >
-                <Plus className="h-auto w-3" />
-              </Button>
-            </div>
-            <CoinInput
-              label={'To'}
-              exchangeRate={0.0}
-              defaultCoinIndex={1}
-              getCoinValue={(data) => console.log('To coin value:', data)}
-            />
+          <FormControl sx={{ m: 1, minWidth: 80 }}>
+            <InputLabel id="demo-simple-select-autowidth-label">Age</InputLabel>
+            <Select
+              labelId="demo-simple-select-autowidth-label"
+              id="demo-simple-select-autowidth"
+              value={age}
+              onChange={handleChange}
+              autoWidth
+              label="Age"
+            >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              <MenuItem value={10}>Twenty</MenuItem>
+              <MenuItem value={21}>Twenty one</MenuItem>
+              <MenuItem value={22}>Twenty one and a half</MenuItem>
+            </Select>
+          </FormControl>
+          {/* <RekInput
+              label={'Rek Code'}
+              exchangeRate={2.0}
+              title={'Rekening'}
+              placeholder={'Input Rekening'}
+              getCoinValue={(data) => console.log(data)}
+              value={rekening}
+              onChange={(e) => {
+                setRekening(e.target.value);
+              }}
+              setCoin={setCoin}
+            /> */}
           </div>
         </div>
-        <div className="flex flex-col gap-4 xs:gap-[18px]">
-          <TransactionInfo label={'13.77 eth per btc'} value={'0%'} />
-          <TransactionInfo
-            label={'0.072631 Btc per ETH'}
-            value={'Share of Pool'}
-          />
-        </div>
+        {spinner && <LinearProgress color="success" />}
+        {result && (
+          <div className="flex flex-col gap-4 xs:gap-[18px]">
+            <TransactionInfo label={'Crypto Value'} value={Jumlah} />
+            <TransactionInfo label={'Market Price'} value={rate} />
+            {/* <TransactionInfo label={'IDR Value'} value={card.idr_value} /> */}
+            {/* <TransactionInfo label={'Fee'} value={'5000'} /> */}
+            <TransactionInfo label={'Total Crypto'} value={total} />
+          </div>
+        )}
         <div className="mt-6 grid grid-cols-2 gap-2.5 xs:mt-8">
-          <ActiveLink href="/liquidity-position">
             <Button
+              onClick={calculate}
               size="large"
               shape="rounded"
               fullWidth={true}
               className="uppercase"
             >
-              Approve BTC
+              Calculate
             </Button>
-          </ActiveLink>
-          <ActiveLink href="/liquidity-position">
             <Button
               size="large"
               shape="rounded"
@@ -69,7 +130,10 @@ const LiquidityPage: NextPageWithLayout = () => {
             >
               Approve ETH
             </Button>
+          {/* <ActiveLink href="/liquidity-position">
           </ActiveLink>
+          <ActiveLink href="/liquidity-position">
+          </ActiveLink> */}
         </div>
       </Trade>
     </>
