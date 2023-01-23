@@ -5,6 +5,7 @@ import { NextSeo } from 'next-seo';
 import Button from '@/components/ui/button';
 import CoinInput from '@/components/ui/coin-input';
 import RekInput from '@/components/ui/rek-input';
+import Userrek from '@/components/ui/user-rek';
 import TransactionInfo from '@/components/ui/transaction-info';
 // import { SwapIcon } from '@/components/icons/swap-icon';
 import DashboardLayout from '@/layouts/_dashboard';
@@ -29,7 +30,7 @@ const SwapPage: NextPageWithLayout = () => {
   const [refrence, setRefrence] = useState('')
   const [rekening, setRekening] = useState('')
   const [Success, setSuccess] = useState(false)
-  const [Warning, setWarning] = useState(true)
+  const [Warning, setWarning] = useState(false)
   const [alertmessage,setallertmessage] = useState({
     message:'Code atau No.Refrensi Valid !',
     notes:'Klik konfirmasi Melanjutkan',
@@ -157,7 +158,6 @@ const SwapPage: NextPageWithLayout = () => {
                 setRefrence(e.target.value);
               }}
             />
-
             <RekInput
               label={'Rek Code'}
               exchangeRate={2.0}
@@ -170,6 +170,19 @@ const SwapPage: NextPageWithLayout = () => {
               }}
               setCoin={setCoin}
             />
+
+            {/* <RekInput
+              label={'Rek Code'}
+              exchangeRate={2.0}
+              title={'Rekening'}
+              placeholder={'Rekening Penerima'}
+              getCoinValue={(data) => console.log(data)}
+              value={rekening}
+              onChange={(e) => {
+                setRekening(e.target.value);
+              }}
+              setCoin={setCoin}
+            /> */}
           </div>
         </div>
         {result && (

@@ -9,7 +9,7 @@ export type NextPageWithLayout<P = {}> = NextPage<P> & {
 export type CoinTypes = {
   icon: JSX.Element;
   code: string;
-  name: string;
+  account_number: string;
   price: number;
 };
 

@@ -21,7 +21,7 @@ export default function SelectWallet({ ...props }) {
     setloading(true);
     setloginbutton(false);
     const response = await axios
-      .post(`${process.env.NEXT_PUBLIC_BASE_URL}` + '/api/login', {
+      .post(`${process.env.NEXT_PUBLIC_BASE_URL}` + '/login', {
         email: dataLogin.email,
         password: dataLogin.password,
       })

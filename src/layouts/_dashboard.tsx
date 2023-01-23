@@ -48,6 +48,7 @@ export function Header() {
   const isMounted = useIsMounted();
   let windowScroll = useWindowScroll();
   let [isOpen, setIsOpen] = useState();
+  const [IsLogin, setIsLogin] = useState(false);
   function Login() {
     if (IsLogin === false) {
       return <HeaderRightArea />;
@@ -55,9 +56,8 @@ export function Header() {
       return <HeaderRightArea2 />;
     }
   }
-  const [IsLogin, setIsLogin] = useState(true);
   const profile = async () => {
-    const res = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}` + '/api/profile/', {
+    const res = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}` + '/profile', {
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem('token')}`,
         },
@@ -112,7 +112,7 @@ export default function Layout({
   const [name, setname] = useState("wawan");
   // const profile = async () => {
   //   const res = await axios
-  //     .get(`${process.env.NEXT_PUBLIC_BASE_URL}` + '/api/profile/', {
+  //     .get(`${process.env.NEXT_PUBLIC_BASE_URL}` + 'profile/', {
   //       headers: {
   //         Authorization: `Bearer ${sessionStorage.getItem('token')}`,
   //       },
