@@ -15,6 +15,8 @@ import LinearProgress from '@mui/material/LinearProgress';
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle'
 import { indexOf } from 'lodash';
+import Listbox, { ListboxOption } from '@/components/ui/list-box';
+
 
 
 const SwapPage: NextPageWithLayout = () => {
@@ -114,6 +116,7 @@ const SwapPage: NextPageWithLayout = () => {
     console.log('confirm');
   };
   let [toggleCoin, setToggleCoin] = useState(false);
+
   return (
     <>
       <NextSeo
@@ -158,6 +161,19 @@ const SwapPage: NextPageWithLayout = () => {
                 setRefrence(e.target.value);
               }}
             />
+            {/* <Userrek
+              label={'Rek Code'}
+              exchangeRate={2.0}
+              title={'Rekening'}
+              placeholder={'Rekening Penerima'}
+              getCoinValue={(data) => console.log(data)}
+              value={rekening}
+              onChange={(e) => {
+                setRekening(e.target.value);
+              }}
+              setCoin={setCoin}
+            />
+             */}
             <RekInput
               label={'Rek Code'}
               exchangeRate={2.0}
@@ -170,19 +186,6 @@ const SwapPage: NextPageWithLayout = () => {
               }}
               setCoin={setCoin}
             />
-
-            {/* <RekInput
-              label={'Rek Code'}
-              exchangeRate={2.0}
-              title={'Rekening'}
-              placeholder={'Rekening Penerima'}
-              getCoinValue={(data) => console.log(data)}
-              value={rekening}
-              onChange={(e) => {
-                setRekening(e.target.value);
-              }}
-              setCoin={setCoin}
-            /> */}
           </div>
         </div>
         {result && (

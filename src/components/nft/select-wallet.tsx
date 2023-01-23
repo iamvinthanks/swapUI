@@ -8,9 +8,14 @@ import Input from '@/components/ui/forms/input';
 import Password from '@/components/ui/forms/password';
 import axios from 'axios';
 import CircularProgress from '@mui/material/CircularProgress';
+import Alert from '@mui/material/Alert';
+import Fade from '@mui/material/Fade';
+
+
 
 export default function SelectWallet({ ...props }) {
   const { address, connectToWallet, error } = useContext(WalletContext);
+  const [alert, setalert] = useState(false);
   const [dataLogin, setdataLogin] = useState({
     email: '',
     password: '',
@@ -33,15 +38,25 @@ export default function SelectWallet({ ...props }) {
       .catch((error) => {
         setloginbutton(true);
         setloading(false);
+        setalert(true);
+        setTimeout(() => {
+          setalert(false);
+        }, 3000);
       });
   };
   const { closeModal } = useModal();
   useEffect(() => {
     if (address) closeModal();
   }, [address, closeModal]);
+const messages = (
+   <Alert severity="error">This is an error alert — check it out!</Alert> 
+)
+ 
 
   return (
+    
     <div className="relative z-50 mx-auto w-[440px] max-w-full rounded-lg bg-white px-9 py-8 dark:bg-light-dark">
+  
       <h2 className="mb-4 text-center text-2xl font-medium uppercase text-gray-900 dark:text-white">
         LOGIN
       </h2>
@@ -69,6 +84,9 @@ export default function SelectWallet({ ...props }) {
           }}
         />
       </div>
+      
+      {alert && <Fade in={alert == true}>{messages}</Fade>}
+      
       <div className="mt-4 mb-4 flex items-center justify-center">
         {loading && <CircularProgress className="text-center" />}
         {loginbutton && (
@@ -80,6 +98,7 @@ export default function SelectWallet({ ...props }) {
           </button>
         )}
       </div>
+      
       <div className="mt-4 mb-4 flex items-center justify-center">
         <div className="w-1/5 border-b border-gray-300 dark:border-gray-700" />
         <div className="mx-4 text-sm text-gray-500 dark:text-gray-400">
@@ -95,6 +114,8 @@ export default function SelectWallet({ ...props }) {
           Register
         </button>
       </div>
+      
     </div>
+    
   );
 }
