@@ -13,103 +13,103 @@ import Trade from '@/components/ui/trade';
 import axios, { Axios } from 'axios';
 import LinearProgress from '@mui/material/LinearProgress';
 import Alert from '@mui/material/Alert';
-import AlertTitle from '@mui/material/AlertTitle'
+import AlertTitle from '@mui/material/AlertTitle';
 import { indexOf } from 'lodash';
 import Listbox, { ListboxOption } from '@/components/ui/list-box';
-
-
 
 const SwapPage: NextPageWithLayout = () => {
   const [buttonSwap, setButtonSwap] = useState({
     id: '1',
     name: 'Swap',
   });
-  const [coin, setCoin] = useState('')
-  const [result, setResult] = useState(false)
-  const [spinner, setSpinner] = useState(false)
-  const [confirm, setConfirm] = useState(false)
-  const [code, setCode] = useState('')
-  const [refrence, setRefrence] = useState('')
-  const [rekening, setRekening] = useState('')
-  const [Success, setSuccess] = useState(false)
-  const [Warning, setWarning] = useState(false)
-  const [alertmessage,setallertmessage] = useState({
-    message:'Code atau No.Refrensi Valid !',
-    notes:'Klik konfirmasi Melanjutkan',
-  })
+  const [coin, setCoin] = useState('');
+  const [result, setResult] = useState(false);
+  const [spinner, setSpinner] = useState(false);
+  const [confirm, setConfirm] = useState(false);
+  const [code, setCode] = useState('');
+  const [refrence, setRefrence] = useState('');
+  const [rekening, setRekening] = useState('');
+  const [Success, setSuccess] = useState(false);
+  const [Warning, setWarning] = useState(false);
+  const [alertmessage, setallertmessage] = useState({
+    message: 'Code atau No.Refrensi Valid !',
+    notes: 'Klik konfirmasi Melanjutkan',
+  });
   const [card, setCard] = useState({
-    codevalue:'',
-    codecoin:'',
-    market_price:'',
-    total_value:'',
+    codevalue: '',
+    codecoin: '',
+    market_price: '',
+    total_value: '',
     fee: 5000,
-    withfee:''
+    withfee: '',
   });
   const setallert = async () => {
     if (buttonSwap.id === '1') {
-      // console.log(code, refrence, rekening, coin);
-      setSpinner(true);
-      const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}`+'/verifcode',{
-        headers: {
-          'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
-        },
-        params: {
-          referenceNo: refrence,
-        }
-      })
-      .then(function(response) {
-        if(response.data.code == 200){
-        setCard(response.data.data);
-        setSpinner(false);
-        setResult(true);
-        setButtonSwap({
-          id:'2',
-          name:'Confirm',
-          });
-        setSuccess(true);
-        setTimeout(() => {
-          setSuccess(false);
-        }, 10000);
-        }
-        if(response.data.code == 201){
-          setSpinner(false);
-          setallertmessage({
-            message:response.data.message,
-            notes:response.data.notes,
-          });
-          setWarning(true);
-          setTimeout(() => {
-            setWarning(false);
-          }, 10000);
-        }
-      })
-      .catch(function(error) {
-        console.log(error.response.data);
-        setSpinner(false);
-          setallertmessage({
-            message:error.response.data.message,
-            notes:error.response.data.notes,
-          });
-          setWarning(true);
-          setTimeout(() => {
-            setWarning(false);
-          }, 10000);
-      })
+      console.log(code, refrence, rekening, coin);
+      // setSpinner(true);
+      // const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}`+'/verifcode',{
+      //   headers: {
+      //     'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
+      //   },
+      //   params: {
+      //     referenceNo: refrence,
+      //   }
+      // })
+      // .then(function(response) {
+      //   if(response.data.code == 200){
+      //   setCard(response.data.data);
+      //   setSpinner(false);
+      //   setResult(true);
+      //   setButtonSwap({
+      //     id:'2',
+      //     name:'Confirm',
+      //     });
+      //   setSuccess(true);
+      //   setTimeout(() => {
+      //     setSuccess(false);
+      //   }, 10000);
+      //   }
+      //   if(response.data.code == 201){
+      //     setSpinner(false);
+      //     setallertmessage({
+      //       message:response.data.message,
+      //       notes:response.data.notes,
+      //     });
+      //     setWarning(true);
+      //     setTimeout(() => {
+      //       setWarning(false);
+      //     }, 10000);
+      //   }
+      // })
+      // .catch(function(error) {
+      //   console.log(error.response.data);
+      //   setSpinner(false);
+      //     setallertmessage({
+      //       message:error.response.data.message,
+      //       notes:error.response.data.notes,
+      //     });
+      //     setWarning(true);
+      //     setTimeout(() => {
+      //       setWarning(false);
+      //     }, 10000);
+      // })
     }
     if (buttonSwap.id === '2') {
-      setSpinner(true)
-      const res = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}`+'/redeemcode',{
-        headers: {
-          'Authorization': 'Bearer' + sessionStorage.getItem('token')
-        },
-        params:{
-          code: code,
-          recipient_bank: coin,
-          recipient_account: rekening
-        }
-      }).then(function(response){
-        console.log(response)
-      })
+      setSpinner(true);
+      const res = await axios
+        .post(`${process.env.NEXT_PUBLIC_BASE_URL}` + '/redeemcode', {
+          headers: {
+            Authorization: 'Bearer' + sessionStorage.getItem('token'),
+          },
+          params: {
+            code: code,
+            recipient_bank: coin,
+            recipient_account: rekening,
+          },
+        })
+        .then(function (response) {
+          console.log(response);
+        });
     }
   };
   const setconfirm = async () => {
@@ -124,12 +124,16 @@ const SwapPage: NextPageWithLayout = () => {
         description="Criptic - React Next Web3 NFT Crypto Dashboard Template"
       />
       <Trade>
-      { Success && <Alert severity='success' className='mb-5'>
-        {alertmessage.message} <strong>{alertmessage.notes}</strong>
-      </Alert>}
-      { Warning && <Alert severity='warning' className='mb-5'>
-        {alertmessage.message} <strong>{alertmessage.notes}</strong>
-      </Alert>}
+        {Success && (
+          <Alert severity="success" className="mb-5">
+            {alertmessage.message} <strong>{alertmessage.notes}</strong>
+          </Alert>
+        )}
+        {Warning && (
+          <Alert severity="warning" className="mb-5">
+            {alertmessage.message} <strong>{alertmessage.notes}</strong>
+          </Alert>
+        )}
         <div className="mb-5 border-b border-dashed border-gray-200 pb-5 dark:border-gray-800 xs:mb-7 xs:pb-6">
           <div
             className={cn(
@@ -161,7 +165,21 @@ const SwapPage: NextPageWithLayout = () => {
                 setRefrence(e.target.value);
               }}
             />
-            {/* <Userrek
+            <Userrek
+              label={'Nomor Rekening'}
+              exchangeRate={2.0}
+              title={'Rekening'}
+              placeholder={'Rekening Penerima'}
+              getCoinValue={(data) => console.log(data)}
+              // value={rekening}
+              // onChange={(e) => {
+              //   setRekening(e.target.value);
+              // }}
+              setRekening={setRekening}
+              setCoin={setCoin}
+            />
+
+            {/* <RekInput
               label={'Rek Code'}
               exchangeRate={2.0}
               title={'Rekening'}
@@ -172,27 +190,20 @@ const SwapPage: NextPageWithLayout = () => {
                 setRekening(e.target.value);
               }}
               setCoin={setCoin}
-            />
-             */}
-            <RekInput
-              label={'Rek Code'}
-              exchangeRate={2.0}
-              title={'Rekening'}
-              placeholder={'Rekening Penerima'}
-              getCoinValue={(data) => console.log(data)}
-              value={rekening}
-              onChange={(e) => {
-                setRekening(e.target.value);
-              }}
-              setCoin={setCoin}
-            />
+            /> */}
           </div>
         </div>
         {result && (
           <div className="flex flex-col gap-4 xs:gap-[18px]">
-            <TransactionInfo label={'Crypto Value'} value={card.codevalue + ' ' + card.codecoin} />
+            <TransactionInfo
+              label={'Crypto Value'}
+              value={card.codevalue + ' ' + card.codecoin}
+            />
             <TransactionInfo label={'Market Price'} value={card.market_price} />
-            <TransactionInfo label={'IDR Value'} value= {'IDR ' + card.total_value} />
+            <TransactionInfo
+              label={'IDR Value'}
+              value={'IDR ' + card.total_value}
+            />
             <TransactionInfo label={'Fee'} value={'5000'} />
             <TransactionInfo label={'Total - Fee'} value={card.withfee} />
           </div>
@@ -210,7 +221,6 @@ const SwapPage: NextPageWithLayout = () => {
           {buttonSwap.name}
         </Button>
       </Trade>
-      
     </>
   );
 };

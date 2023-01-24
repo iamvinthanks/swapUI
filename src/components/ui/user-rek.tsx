@@ -11,9 +11,7 @@ import { rekList } from '@/data/static/rek-list';
 // const CoinSelectView = dynamic(
 //   () => import('@/components/ui/coin-select-view')
 // );
-const RekSelectView = dynamic(
-    () => import('@/components/ui/rek-select-view')
-    );
+const RekSelectView = dynamic(() => import('@/components/ui/rek-select-view'));
 
 interface CoinInputTypes extends React.InputHTMLAttributes<HTMLInputElement> {
   label: string;
@@ -21,6 +19,7 @@ interface CoinInputTypes extends React.InputHTMLAttributes<HTMLInputElement> {
   defaultCoinIndex?: number;
   className?: string;
   setCoin: (coin: string) => void;
+  setRekening: (rekening: string) => void;
   getCoinValue: (param: { coin: string; value: string }) => void;
 }
 
@@ -33,6 +32,7 @@ export default function Userrek({
   exchangeRate,
   className,
   setCoin,
+  setRekening,
   ...rest
 }: CoinInputTypes) {
   let [value, setValue] = useState('');
@@ -50,11 +50,14 @@ export default function Userrek({
       let param = { coin: selectedCoin.code, value: event.target.value };
       getCoinValue && getCoinValue(param);
       setCoin(selectedCoin.code);
+      setRekening(selectedCoin.name);
     }
   };
   function handleSelectedCoin(coin: CoinTypes) {
     setSelectedCoin(coin);
     setCoin(coin.code);
+    setRekening(coin.name);
+
     setVisibleCoinList(false);
   }
 
@@ -62,7 +65,7 @@ export default function Userrek({
     <>
       <div
         className={cn(
-          'group flex min-h-[70px] rounded-lg border border-gray-200 transition-colors duration-200 hover:border-gray-900 dark:border-gray-700 dark:hover:border-gray-600',
+          ' min-h-[70px] rounded-lg border border-gray-200 transition-colors duration-200 hover:border-gray-900 dark:border-gray-700 dark:hover:border-gray-600',
           className
         )}
       >
@@ -74,16 +77,17 @@ export default function Userrek({
             onClick={() => {
               setVisibleCoinList(true);
             }}
-            className="flex items-center font-medium outline-none dark:text-gray-100"
+            // className="flex items-center font-medium outline-none dark:text-gray-100"
+            className="flex w-full rounded-tr-lg rounded-br-lg border-0 pb-0.5 text-left text-lg outline-none focus:ring-0 dark:bg-light-dark"
             value={selectedCoin?.code}
             id="type_rekening"
           >
             {selectedCoin?.icon}{' '}
-            <span className="ltr:ml-2 rtl:mr-2">{selectedCoin?.account_number} </span>
-            <ChevronDown className="ltr:ml-1.5 rtl:mr-1.5" />
+            <span className="ltr:ml-2 rtl:mr-2">{selectedCoin?.name} </span>
+            {/* <ChevronDown className="ltr:ml-1.5 rtl:mr-1.5" /> */}
           </button>
         </div>
-        <input
+        {/* <input
           type="text"
           value={value}
           placeholder={placeholder}
@@ -91,12 +95,12 @@ export default function Userrek({
           onChange={handleOnChange}
           className="w-full rounded-tr-lg rounded-br-lg border-0 pb-0.5 text-right text-lg outline-none focus:ring-0 dark:bg-light-dark"
           {...rest}
-        />
-        <div className="flex flex-1 flex-col text-right">
-          {/* <span className="font-xs px-3 text-gray-400">
+        /> */}
+        {/* <div className="flex flex-1 flex-col text-right">
+          <span className="font-xs px-3 text-gray-400">
             {rekening}
-          </span> */}
-        </div>
+          </span>
+        </div> */}
       </div>
 
       <AnimatePresence>
