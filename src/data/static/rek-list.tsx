@@ -10,15 +10,6 @@ import { useEffect, useState } from 'react';
 import React from 'react';
 import { map } from 'lodash';
 
-// const [data, setData] = useState([]);
-// useEffect(() => {
-//     axios.get('https://63c0cd6d71656267186d60c4.mockapi.io/price')
-//         .then((res) => {
-//             setData(res.data);
-//             console.log(res.data);
-//         })
-// }, [])
-
 const data = [
   {
     icon: <Bitcoin />,
@@ -31,14 +22,35 @@ const resp = axios
   .get('https://63c0cd6d71656267186d60c4.mockapi.io/price')
   .then((res) => {
     map(res.data, (key) => {
+      console.log('data', key.code);
+      if (key.code === 'CO') {
+        key.icon = <Bitcoin />;
+      }
+      if (key.code === 'ML') {
+        key.icon = <Ethereum />;
+      }
+      if (key.code === 'ZM') {
+        key.icon = <Tether />;
+      }
+      if (key.code === 'VC') {
+        key.icon = <Bnb />;
+      }
+      if (key.code === 'MD') {
+        key.icon = <Usdc />;
+      }
+      if (key.code === 'US') {
+        key.icon = <Cardano />;
+      }
+      if (key.code === 'IO') {
+        key.icon = <Doge />;
+      }
       data.push({
-        icon: <Bitcoin />,
+        icon: key.icon,
         code: key.code,
         name: key.name,
         price: key.price,
       });
     });
-    console.log(data);
   });
 function getRekList() {
   return data;
