@@ -23,7 +23,7 @@ import { Flow } from '@/components/icons/flow';
 import { Warning } from '@/components/icons/warning';
 import { Unlocked } from '@/components/icons/unlocked';
 import Avatar from '@/components/ui/avatar';
-import RekInput from '@/components/ui/rek-input';
+import Userrek from '@/components/ui/user-rek';
 //images
 import AuthorImage from '@/assets/images/author.jpg';
 import NFT1 from '@/assets/images/nft/nft-1.jpg';
@@ -164,17 +164,31 @@ const CreateNFTPage: NextPageWithLayout = () => {
           />
         </div>
         <div className="mb-8">
+          <InputLabel title="Buyer ID" important />
+          <Input
+            value={amount}
+            min={0}
+            type="number"
+            placeholder="Enter Buyer ID"
+            inputClassName="spin-button-hidden"
+            onChange={(e) => {
+              setAmount(e.target.value);
+            }}
+          />
+        </div>
+        <div className="mb-8">
           <InputLabel title="rekening Pencairan" important />
-          <RekInput
-            label={'Rek Code'}
+          <Userrek
+            label={'Nomor Rekening'}
             exchangeRate={2.0}
             title={'Rekening'}
-            placeholder={'Input Rekening'}
+            placeholder={'Rekening Penerima'}
             getCoinValue={(data) => console.log(data)}
-            value={rekening}
-            onChange={(e) => {
-              setRekening(e.target.value);
-            }}
+            // value={rekening}
+            // onChange={(e) => {
+            //   setRekening(e.target.value);
+            // }}
+            setRekening={setRekening}
             setCoin={setCoin}
           />
         </div>

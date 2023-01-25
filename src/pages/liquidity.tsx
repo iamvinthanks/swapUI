@@ -10,24 +10,20 @@ import Trade from '@/components/ui/trade';
 import RekInput from '@/components/ui/rek-input';
 import LinearProgress from '@mui/material/LinearProgress';
 import { SetStateAction, useEffect, useState } from 'react';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
+import Userrek from '@/components/ui/user-rek';
+import AvailableCoin from '@/components/ui/available-coin';
+import axios from 'axios';
 
 const LiquidityPage: NextPageWithLayout = () => {
-  const [age, setAge] = useState('');
-  const handleChange = (event: { target: { value: SetStateAction<string>; }; }) => {
-    setAge(event.target.value);
-  };
   const [Jumlah, setJumlah] = useState('');
-  const [refrence, setRefrence] = useState('');
-  const [rekening, setRekening] = useState('');
-  const [coin, setCoin] = useState('');
-  const [result, setResult] = useState(true);
+  const [payment, setpayment] = useState('');
+  const [paymentid, setpaymentid] = useState('');
+  const [SelectedCoin, setSelectedCoin] = useState('');
+  const [Coin, setCoin] = useState('');
+  const [result, setResult] = useState(false);
   const [spinner, setSpinner] = useState(false);
   const [rate, setRate] = useState(0);
-  const[total, setTotal] = useState('');
+  const [total, setTotal] = useState('');
   const [card, setCard] = useState({
     idr_value: '0',
     crypto_value: '0',
@@ -35,19 +31,21 @@ const LiquidityPage: NextPageWithLayout = () => {
     market_value: '',
   });
   const calculate = async () => {
-    console.log(age)
-    // const res = await fetch(
-    //   `https://indodax.com/api/usdt_idr/ticker`
-    //   )
-    //   const data = await res.json();
-    //   setRate(data.ticker.high)
-    //   setTotal((parseFloat(Jumlah) / parseFloat(data.ticker.high)).toFixed(8))
-  }
-  
+    let SelectedCoin2 = Coin.toLowerCase();
+    setResult(false);
+    setSpinner(true);
+    const res = await axios.get(
+      `https://indodax.com/api/${SelectedCoin2}_idr/ticker`
+    );
+    setRate(res.data.ticker.high);
+    setTotal(
+      (parseFloat(Jumlah) / parseFloat(res.data.ticker.high)).toFixed(8)
+    );
+    setSpinner(false);
+    setResult(true);
 
-  
-
-  
+    // console.log(Jumlah,SelectedCoin,payment,paymentid)
+  };
   return (
     <>
       <NextSeo
@@ -57,7 +55,7 @@ const LiquidityPage: NextPageWithLayout = () => {
       <Trade>
         <div className="mb-5 border-b border-dashed border-gray-200 pb-5 dark:border-gray-800 xs:mb-7 xs:pb-6">
           <div className="relative flex flex-col gap-3">
-          <CoinInput
+            <CoinInput
               label={'Jumlah'}
               exchangeRate={1.0}
               title={'IDR'}
@@ -70,66 +68,58 @@ const LiquidityPage: NextPageWithLayout = () => {
                 setJumlah(e.target.value);
               }}
             />
-          <FormControl sx={{ m: 1, minWidth: 80 }}>
-            <InputLabel id="demo-simple-select-autowidth-label">Age</InputLabel>
-            <Select
-              labelId="demo-simple-select-autowidth-label"
-              id="demo-simple-select-autowidth"
-              value={age}
-              onChange={handleChange}
-              autoWidth
-              label="Age"
-            >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              <MenuItem value={10}>Twenty</MenuItem>
-              <MenuItem value={21}>Twenty one</MenuItem>
-              <MenuItem value={22}>Twenty one and a half</MenuItem>
-            </Select>
-          </FormControl>
-          {/* <RekInput
-              label={'Rek Code'}
+            <AvailableCoin
+              label={'Select Coin'}
               exchangeRate={2.0}
               title={'Rekening'}
-              placeholder={'Input Rekening'}
+              placeholder={'Rekening Penerima'}
               getCoinValue={(data) => console.log(data)}
-              value={rekening}
-              onChange={(e) => {
-                setRekening(e.target.value);
-              }}
+              setRekening={setSelectedCoin}
               setCoin={setCoin}
-            /> */}
+            />
+            <Userrek
+              label={'Metode Pembayaran'}
+              exchangeRate={2.0}
+              title={'Rekening'}
+              placeholder={'Rekening Penerima'}
+              getCoinValue={(data) => console.log(data)}
+              // value={rekening}
+              // onChange={(e) => {
+              //   setRekening(e.target.value);
+              // }}
+              setRekening={setpayment}
+              setCoin={setpaymentid}
+            />
           </div>
         </div>
         {spinner && <LinearProgress color="success" />}
         {result && (
           <div className="flex flex-col gap-4 xs:gap-[18px]">
-            <TransactionInfo label={'Crypto Value'} value={Jumlah} />
-            <TransactionInfo label={'Market Price'} value={rate} />
+            <TransactionInfo label={'Estimasi Crypto'} value={Jumlah} />
+            <TransactionInfo label={'Estimasi Harga Market'} value={rate} />
             {/* <TransactionInfo label={'IDR Value'} value={card.idr_value} /> */}
             {/* <TransactionInfo label={'Fee'} value={'5000'} /> */}
-            <TransactionInfo label={'Total Crypto'} value={total} />
+            <TransactionInfo label={'Estimasi Total Crypto'} value={total} />
           </div>
         )}
         <div className="mt-6 grid grid-cols-2 gap-2.5 xs:mt-8">
-            <Button
-              onClick={calculate}
-              size="large"
-              shape="rounded"
-              fullWidth={true}
-              className="uppercase"
-            >
-              Calculate
-            </Button>
-            <Button
-              size="large"
-              shape="rounded"
-              fullWidth={true}
-              className="uppercase"
-            >
-              Approve ETH
-            </Button>
+          <Button
+            onClick={calculate}
+            size="large"
+            shape="rounded"
+            fullWidth={true}
+            className="uppercase"
+          >
+            Calculate
+          </Button>
+          <Button
+            size="large"
+            shape="rounded"
+            fullWidth={true}
+            className="uppercase"
+          >
+            Buy Gift Card
+          </Button>
           {/* <ActiveLink href="/liquidity-position">
           </ActiveLink>
           <ActiveLink href="/liquidity-position">
