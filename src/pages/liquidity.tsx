@@ -10,7 +10,7 @@ import Trade from '@/components/ui/trade';
 import RekInput from '@/components/ui/rek-input';
 import LinearProgress from '@mui/material/LinearProgress';
 import { SetStateAction, useEffect, useState } from 'react';
-import Userrek from '@/components/ui/user-rek';
+import PaymentList from '@/components/ui/payment-list';
 import AvailableCoin from '@/components/ui/available-coin';
 import axios from 'axios';
 
@@ -77,7 +77,7 @@ const LiquidityPage: NextPageWithLayout = () => {
               setRekening={setSelectedCoin}
               setCoin={setCoin}
             />
-            <Userrek
+            <PaymentList
               label={'Metode Pembayaran'}
               exchangeRate={2.0}
               title={'Rekening'}

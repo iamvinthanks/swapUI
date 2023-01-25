@@ -39,9 +39,9 @@ export default function SelectWallet({ ...props }) {
         setloginbutton(true);
         setloading(false);
         setalert(true);
-        setTimeout(() => {
-          setalert(false);
-        }, 3000);
+        // setTimeout(() => {
+        //   setalert(false);
+        // }, 3000);
       });
   };
   const { closeModal } = useModal();

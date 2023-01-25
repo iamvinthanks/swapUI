@@ -16,6 +16,7 @@ import NftDropDown from './nft-dropdown';
 import Avatar from '@/components/ui/avatar';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import PaymentList from '../ui/payment-list';
 
 interface NftFooterProps {
   className?: string;
@@ -35,6 +36,8 @@ function NftFooter({
   const { openModal } = useModal();
   const [Usertype, setUserType] = useState('seller');
   const [approve, setApprove] = useState('');
+  const [payment, setpayment] = useState('');
+  const [paymentid, setpaymentid] = useState('');
   useEffect(() => {
     if (Usertype === 'seller') {
       setApprove('Confirm Order Procesed');
@@ -65,23 +68,36 @@ function NftFooter({
                 </AnchorLink>
               </h3>
               <div className="text-lg font-medium -tracking-wider md:text-xl xl:text-2xl">
-                {currentBid?.amount} ETH
+                {/* {currentBid?.amount} ETH */}
+                Rp 1.000.000
               </div>
               <AnchorLink
                 href={currentBid?.authorSlug ?? '#'}
                 className="mt-2 hidden items-center text-sm font-medium text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white md:inline-flex"
-              >
-                <div className="h-6 w-6 rounded-full ltr:mr-2 rtl:ml-2">
+              > 
+                {/* <div className="h-6 w-6 rounded-full ltr:mr-2 rtl:ml-2">
                   <Image src={Avatar1} alt="avatar" width={24} height={24} />
-                </div>
-                @{currentBid?.name}
+                </div> */}
               </AnchorLink>
             </div>
             <div className="block w-1/2 shrink-0 md:w-3/5">
-              <h3 className="mb-1 truncate text-13px font-medium uppercase tracking-wider text-gray-900 dark:text-white sm:mb-1.5 sm:text-sm">
-                Auction ends in
-              </h3>
-              <AuctionCountdown date={auctionTime} />
+              {/* <h3 className="mb-1 truncate text-13px font-medium uppercase tracking-wider text-gray-900 dark:text-white sm:mb-1.5 sm:text-sm">
+                Metode Pembayaran
+              </h3> */}
+              {/* <AuctionCountdown date={auctionTime} /> */}
+              <PaymentList
+              label={'Metode Pembayaran'}
+              exchangeRate={2.0}
+              title={'Rekening'}
+              placeholder={'Rekening Penerima'}
+              getCoinValue={(data) => console.log(data)}
+              // value={rekening}
+              // onChange={(e) => {
+              //   setRekening(e.target.value);
+              // }}
+              setRekening={setpayment}
+              setCoin={setpaymentid}
+            />
             </div>
           </div>
         )}
@@ -93,11 +109,10 @@ function NftFooter({
           <Button
             shape="rounded"
             variant="solid"
-            color="gray"
             className="dark:bg-gray-800"
             onClick={() => openModal('SHARE_VIEW')}
           >
-            REPORT
+            Deposit Dana
           </Button>
         </div>
       </div>
@@ -161,9 +176,9 @@ export default function NftDetails({ product }: { product: NftDetailsProps }) {
                 <h2 className="text-xl font-medium leading-[1.45em] -tracking-wider text-gray-900 dark:text-white md:text-2xl xl:text-3xl">
                   {name}
                 </h2>
-                <div className="mt-1.5 shrink-0 ltr:ml-3 rtl:mr-3 xl:mt-2">
+                {/* <div className="mt-1.5 shrink-0 ltr:ml-3 rtl:mr-3 xl:mt-2">
                   <NftDropDown />
-                </div>
+                </div> */}
               </div>
               Transaksi Dibuat {minted_date}
               <div className="mt-4 flex flex-wrap gap-6 pt-0.5 lg:-mx-6 lg:mt-6 lg:gap-0">
