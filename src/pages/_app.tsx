@@ -50,7 +50,7 @@ function CustomApp({ Component, pageProps }: AppPropsWithLayout) {
             </WalletProvider>
           </ThemeProvider>
         </Hydrate>
-        <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
+        {/* <ReactQueryDevtools initialIsOpen={false} position="bottom-right" /> */}
       </QueryClientProvider>
     </>
   );
