@@ -5,11 +5,11 @@ import { NextSeo } from 'next-seo';
 import Button from '@/components/ui/button';
 import CoinInput from '@/components/ui/coin-input';
 import RekInput from '@/components/ui/rek-input';
-import Userrek from '@/components/ui/user-rek';
+import Userrek from '@/components/ui/crypto-list';
 import TransactionInfo from '@/components/ui/transaction-info';
 // import { SwapIcon } from '@/components/icons/swap-icon';
 import DashboardLayout from '@/layouts/_dashboard';
-import Trade from '@/components/ui/trade';
+import CryptoSwap from '@/components/ui/cryptoswap';
 import axios, { Axios } from 'axios';
 import LinearProgress from '@mui/material/LinearProgress';
 import Alert from '@mui/material/Alert';
@@ -17,7 +17,7 @@ import AlertTitle from '@mui/material/AlertTitle';
 import { indexOf } from 'lodash';
 import Listbox, { ListboxOption } from '@/components/ui/list-box';
 
-const SwapPage: NextPageWithLayout = () => {
+const SellPage: NextPageWithLayout = () => {
   const [buttonSwap, setButtonSwap] = useState({
     id: '1',
     name: 'Swap',
@@ -123,7 +123,7 @@ const SwapPage: NextPageWithLayout = () => {
         title="Binance GiftCard"
         description="Criptic - React Next Web3 NFT Crypto Dashboard Template"
       />
-      <Trade>
+      <CryptoSwap>
         {Success && (
           <Alert severity="success" className="mb-5">
             {alertmessage.message} <strong>{alertmessage.notes}</strong>
@@ -165,6 +165,7 @@ const SwapPage: NextPageWithLayout = () => {
                 setRefrence(e.target.value);
               }}
             />
+
             <Userrek
               label={'Nomor Rekening'}
               exchangeRate={2.0}
@@ -220,12 +221,12 @@ const SwapPage: NextPageWithLayout = () => {
         >
           {buttonSwap.name}
         </Button>
-      </Trade>
+      </CryptoSwap>
     </>
   );
 };
 
-SwapPage.getLayout = function getLayout(page) {
+SellPage.getLayout = function getLayout(page) {
   return <DashboardLayout>{page}</DashboardLayout>;
 };
-export default SwapPage;
+export default SellPage;

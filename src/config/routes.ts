@@ -19,6 +19,8 @@ const routes = {
   portfolio: '/profile?view=portfolio',
   history: '/profile?view=history',
   classic: '/classic',
+  sellcrypto: '/sell-crypto',
+  buycrypto: '/buy-crypto',
 };
 
 export default routes;

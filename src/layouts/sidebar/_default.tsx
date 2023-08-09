@@ -66,6 +66,21 @@ export const menuItems = [
       },
     ],
   },
+  {
+    name: 'Buy Sell Crypto',
+    icon: <ExchangeIcon />,
+    href: routes.buycrypto,
+    dropdownItems: [
+      {
+        name: 'Buy Crypto',
+        href: routes.buycrypto,
+      },
+      {
+        name: 'Sell Crypto',
+        href: routes.sellcrypto,
+      },
+    ],
+  },
   // {
   //   name: 'Liquidity',
   //   icon: <PoolIcon />,
@@ -95,7 +110,6 @@ export const menuItems = [
         href: routes.nftDetails,
       },
     ],
-    
   },
 
   {
